@@ -28,7 +28,6 @@
     <link rel="stylesheet" href="<?php echo base_url('/assets/spatialcss/styledLayerControlUpdated2017.css') ?>" />
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('/assets/spatialcss/bootstrap-datepicker.min.css') ?>" />
 
-
     <script src="<?php echo base_url('/assets/spatialjs/bundleUpdate2017_review.js') ?>"></script>
 
     <script>
@@ -54,6 +53,8 @@
         var defaultMapLayer = <?php echo $council->default_map_layer ?> ,
             defaultMapName = '<?php echo $council->default_map_name ?>';
     </script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/webapp.css">
 </head>
 
 <body>
@@ -598,68 +599,141 @@
         </script>
 
 <script type="text/x-template" id="form-layout">
-<div class="container">
-  <div class="col-md-5 col-md-offset-3">
-    <br style="clear:both">
-    <h3 class="center">GPS-Camera-PDF Demo</h3>
-    <p class="gps">
-      <div class="well center">
-        <button type="button" id="gps" class="btn btn-success">Get GPS Co-ordinates</button>
-        <p id="demo"></p>
-      </div>
-    </p>
-    <p class="gps">
-      <div class="well center">
-        <div class="camera">
-          <video id="video">Video stream not available.</video>
-          <button id="startbutton" name="start" class="btn btn-success">Start Camera</button>
-        </div>
-        <canvas id="canvas">
-        </canvas>
-        <div class="output">
-          <img id="photo" alt="The screen capture will appear in this area.">
-        </div>
-      </div>
-    </p>
-    <div class="form-area well">
-      <form role="form">
-        <label>Client Details:</label>
-        <div class="form-group">
-          <input type="text" class="form-control" id="name" name="name" placeholder="Name" required>
-        </div>
-        <div class="form-group">
-          <input type="text" class="form-control" id="email" name="email" placeholder="Email" required>
-        </div>
-        <div class="form-group">
-          <input type="text" class="form-control" id="contact" name="contact" placeholder="Contact Number" required>
-        </div>
-        <label>Checkboxes:</label>
-        <div class="checkbox">
-          <label><input id="one" type="checkbox" value="Option 1">Option 1</label>
-        </div>
-        <div class="checkbox">
-          <label><input id="two" type="checkbox" value="Option 2">Option 2</label>
-        </div>
-        <div class="form-group">
-          <label for="sel1">Select list:</label>
-          <select class="form-control" id="sel1">
-            <option value="Red">Red</option>
-            <option value="Orange">Orange</option>
-            <option value="Yellow">Yellow</option>
-            <option value="Green">Green</option>
-          </select>
-        </div>
-        <label>Further Comments:</label>
-        <div class="form-group">
-          <textarea class="form-control" type="textarea" id="message" placeholder="Comments" maxlength="140" rows="7"></textarea>
-        </div>
-        <div class="center">
-          <button type="button" id="submit" name="submit" class="btn btn-success">Download PDF Document</button>
-        </div>
-
-      </form>
-    </div>
+<div class="row cont-center">
+  <div class="col-sm-10 col-sm-offset-1">
+    <div class="col-sm-12">
+      <div class="form-group center">
+        <label for="inspection">Details</label>
+        <table class="table table-sm table-hover table-striped table-bordered">
+    <tbody>
+      <tr>
+        <th scope="row">Client Number:</th>
+        <td># 2001</td>
+      </tr>
+      <tr>
+        <th scope="row">ID Number:</th>
+        <td># 5001</td>
+      </tr>
+      <tr>
+          <th scope="row">Date:</th>
+        <td><?php echo date("d/m/Y");?></td>
+      </tr>
+      <tr>
+          <th scope="row">Time:</th>
+        <td><?php echo date("h:i:sa");?></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="form-group">
+    <label for="inspection">Inspection</label>
+    <select class="form-control" id="exampleFormControlSelect1">
+      <option>Manhole</option>
+      <option>Smoke</option>
+      <option>Connections</option>
+      <option>I / I</option>
+    </select>
   </div>
+      </div>
+    </div>
+    <div class="col-sm-5">
+
+      <!-- <div class="col-sm-12">
+        <div class="square-service-block">
+           <a href="#">
+             <div class="ssb-icon"><i class="fa fa-calendar" aria-hidden="true"></i></div>
+             <h2 class="ssb-title">Date &amp; Time</h2>
+           </a>
+        </div>
+      </div> -->
+
+                <div class="col-sm-12">
+                  <div class="square-service-block">
+                     <a href="#">
+                       <div class="ssb-icon"><i class="fa fa-globe" aria-hidden="true"></i></div>
+                       <h2 class="ssb-title">GPS</h2>
+                     </a>
+                  </div>
+                </div>
+
+                <div class="col-sm-12">
+                  <div class="square-service-block">
+                     <a href="#">
+                       <div class="ssb-icon"><i class="fa fa-camera" aria-hidden="true"></i></div>
+                       <h2 class="ssb-title">Add Image</h2>
+                     </a>
+                  </div>
+                </div>
+
+                <div class="col-sm-12">
+                  <div class="square-service-block">
+                     <a href="#">
+                       <div class="ssb-icon"><i class="fa fa-camera" aria-hidden="true"></i></div>
+                       <h2 class="ssb-title">Add Image</h2>
+                     </a>
+                  </div>
+                </div>
+
+                <!-- <div class="col-sm-12">
+                  <div class="square-service-block">
+                     <a href="#">
+                       <div class="ssb-icon"><i class="fa fa-file-text-o" aria-hidden="true"></i></div>
+                       <h2 class="ssb-title">Comments</h2>
+                     </a>
+                  </div>
+                </div> -->
+    </div>
+    <div class="col-sm-7">
+
+      <!-- <div class="col-sm-12">
+        <div class="square-info-block">
+           <a href="#">
+             <div class="ssb-icon-info"></div>
+             <h2 class="ssb-title-info">GPS</h2>
+
+           </a>
+        </div>
+      </div> -->
+
+                <div class="col-sm-12">
+                  <div class="square-info-block">
+                     <a href="#">
+                       <div class="ssb-icon-info"></div>
+                       <!-- <h2 class="ssb-title-info">GPS</h2> -->
+                     </a>
+                  </div>
+                </div>
+
+                <div class="col-sm-12">
+                  <div class="square-info-block">
+                     <a href="#">
+                       <div class="ssb-icon-info"></div>
+                       <!-- <h2 class="ssb-title-info">GPS</h2> -->
+                     </a>
+                  </div>
+                </div>
+
+                <div class="col-sm-12">
+                  <div class="square-info-block">
+                     <a href="#">
+                       <div class="ssb-icon-info"></div>
+                       <!-- <h2 class="ssb-title-info">GPS</h2> -->
+                     </a>
+                  </div>
+                </div>
+
+                <!-- <div class="col-sm-12">
+                  <div class="square-info-block">
+                     <a href="#">
+                       <div class="ssb-icon-info"></div>
+                       <h2 class="ssb-title-info">GPS</h2>
+                     </a>
+                  </div>
+                </div> -->
+
+    </div>
+
+  </div>
+
 </div>
 </script>
 

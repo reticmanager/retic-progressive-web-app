@@ -1,0 +1,93 @@
+@media (max-width: 768px) {
+
+}
+
+.center {
+  text-align: center;
+}
+
+.cont-center {
+  display: inline;
+}
+
+a:hover, a:focus {
+  color: #28a747;
+  text-decoration: none;
+}
+.square-service-block{
+	position:relative;
+	overflow:hidden;
+	margin:15px auto;
+  height: 10em;
+	}
+.square-service-block a {
+  height: 100%;
+  background-color: #28a747;
+  border-radius: 2px;
+  display: block;
+  padding: 2em 1.5em;
+  text-align: center;
+  width: 100%;
+}
+.square-service-block a:hover{
+  background-color: #66BB6A;
+  border-radius: 2px;
+}
+
+.ssb-icon {
+  color: #fff;
+  display: inline-block;
+  font-size: 3rem;
+  margin: 0 0 20px;
+}
+
+h2.ssb-title {
+  color: #fff;
+  font-size: 1.4rem;
+  font-weight: 200;
+  margin:0;
+  padding:0;
+  text-transform: uppercase;
+}
+
+/*Separation*/
+a:hover, a:focus {
+  color: #28a747;
+  text-decoration: none;
+}
+.square-info-block{
+	position:relative;
+	overflow:hidden;
+	margin:15px auto;
+  height: 10em;
+	}
+.square-info-block a {
+  /*background-color: #28a747;*/
+  height: 100%;
+  border-radius: 2px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #28a747;
+  display: block;
+  padding: 55px 20px;
+  text-align: center;
+  width: 100%;
+}
+.square-info-block a:hover{
+  /*background-color: #66BB6A;*/
+  border-radius: 2px;
+}
+
+.ssb-icon-info {
+  display: inline-block;
+  font-size: 45px;
+  margin: 0 0 20px;
+}
+
+h2.ssb-title-info {
+  font-size: 20px;
+  font-weight: 200;
+  margin:0;
+  padding:0;
+  text-transform: uppercase;
+}
