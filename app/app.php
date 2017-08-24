@@ -579,8 +579,30 @@
             },
             components: {
               'layout-cont': {
-                template: '#form-layout'
+                template: '#form-layout',
+                data: function () {
+                  return {
+                    lat: "",
+                    long: ""
+                  }
+                },
+                methods: {
+                  getLocation: function () {
+                    if (navigator.geolocation) {
+                      navigator.geolocation.getCurrentPosition(this.showPosition);
+                    } else {
+                      alert('Geolocation not supported');
+                    }
+                  },
+                  showPosition: function (position) {
+                    this.lat = position.coords.latitude;
+                    this.long = position.coords.longitude;
+                  }
+                }
               }
+            },
+            methods: {
+
             }
           })
           var nav = new Vue({
@@ -636,19 +658,9 @@
       </div>
     </div>
     <div class="col-sm-5">
-
-      <!-- <div class="col-sm-12">
-        <div class="square-service-block">
-           <a href="#">
-             <div class="ssb-icon"><i class="fa fa-calendar" aria-hidden="true"></i></div>
-             <h2 class="ssb-title">Date &amp; Time</h2>
-           </a>
-        </div>
-      </div> -->
-
                 <div class="col-sm-12">
                   <div class="square-service-block">
-                     <a href="#">
+                     <a v-on:click="getLocation">
                        <div class="ssb-icon"><i class="fa fa-globe" aria-hidden="true"></i></div>
                        <h2 class="ssb-title">GPS</h2>
                      </a>
@@ -672,34 +684,11 @@
                      </a>
                   </div>
                 </div>
-
-                <!-- <div class="col-sm-12">
-                  <div class="square-service-block">
-                     <a href="#">
-                       <div class="ssb-icon"><i class="fa fa-file-text-o" aria-hidden="true"></i></div>
-                       <h2 class="ssb-title">Comments</h2>
-                     </a>
-                  </div>
-                </div> -->
     </div>
     <div class="col-sm-7">
-
-      <!-- <div class="col-sm-12">
-        <div class="square-info-block">
-           <a href="#">
-             <div class="ssb-icon-info"></div>
-             <h2 class="ssb-title-info">GPS</h2>
-
-           </a>
-        </div>
-      </div> -->
-
                 <div class="col-sm-12">
                   <div class="square-info-block">
-                     <a href="#">
-                       <div class="ssb-icon-info"></div>
-                       <!-- <h2 class="ssb-title-info">GPS</h2> -->
-                     </a>
+                    <pre>{{ $data }}</pre>
                   </div>
                 </div>
 
@@ -720,15 +709,6 @@
                      </a>
                   </div>
                 </div>
-
-                <!-- <div class="col-sm-12">
-                  <div class="square-info-block">
-                     <a href="#">
-                       <div class="ssb-icon-info"></div>
-                       <h2 class="ssb-title-info">GPS</h2>
-                     </a>
-                  </div>
-                </div> -->
 
     </div>
 
