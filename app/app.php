@@ -53,7 +53,6 @@
         var defaultMapLayer = <?php echo $council->default_map_layer ?> ,
             defaultMapName = '<?php echo $council->default_map_name ?>';
     </script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/css/webapp.css">
 </head>
 
@@ -83,188 +82,179 @@
         <input type="text" class="input-sm form-control" name="end" />
     </div>
 
-    <div class="container">
+    <div class="container-fluid no-padding">
         <div id="wrapper">
             <div id="mySidenav" class="sidenav">
-                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">�</a>
             </div>
             <div id="header">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <ul class="nav navbar-nav">
-                            <li><a class="navbar-brand" href="https://www.reticmanager.com"><img alt="reticmanager logo" src="<?php echo base_url('/assets/images/RMLogo215x40.png') ?>" style="width: 215px; height: 40px;"></a>
-                            </li>
-                            <ul class="pull-right nav">
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><h4 style="color:#ffffff; " title="ReticManager Meu - Select a network to start" id="menu-button"> &nbsp; menu ☰  &nbsp;  </h4></a>
-                                    <ul class="dropdown-menu" style="display: none; width: 250px; right: 30px;">
-                                        <!-- <li><h4 style="display: inline-block; margin-left: 15px;">ReticManager Menu</h4></li>
-										<li><hr></li> -->
-                                        <!-- 			<li><button title="click to load wastewater data / map or to reset this network" id="waste-button" class="btn btn-default" style=" padding-left: 4px; padding-right: 4px; padding-top: 2px; padding-bottom: 2px; margin-left: 10px;">Sewer Network</button><button title="click to load stormwater data / map or to reset this network" id="storm-button" class="btn btn-default" style=" padding-left: 4px; padding-right: 4px; padding-top: 2px; padding-bottom: 2px; margin-left: 10px;">Storm Network</button></li> -->
+                <div class="container-fluid no-padding">
+					<nav class="navbar navbar-default" role="navigation">
+					  <div class="container-fluid">
+						<div class="navbar-header">
+						  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#retic-navbar-collapse">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						  </button>
+						  <a class="navbar-brand" href="https://www.reticmanager.com"><img alt="reticmanager logo" src="<?php echo base_url('/assets/images/RMLogo215x40.png') ?>" ></a>
+						</div>
 
-										<li>
-                                            <h4 style="text-align: center;font-size: 1.0em;">ReticManager v3.1 Menu</h4>
-                                        </li>
-                                        <li>
-                                            <hr>
-                                        </li>
-                                        <li>
-                                            <h5 style="text-align: center;font-size: 0.875em;">SURVEY DATA</h5>
-                                        </li>
-                                        <li class="divider"></li>
-                                        <span><h5 style="text-align:center;"><b style="color:#b22524;">Sewer</b> &nbsp;&nbsp; <b style="color:#23903e;">Storm</b></h5></span>
-                                        <li><button id="sewer-button1" title="CCTV Inspections" <?php if ($council->sewer1 == '1') { ?> disabled<?php } ?> class="btn btn-default One" style="margin-left: 35px;">CCTV</button><button id="storm-button1" title="CCTV Inspections" <?php if ($council->storm1 == '1') { ?> disabled<?php } ?> class="btn btn-default Two">CCTV</button></li>
-                                        <li><button id="sewer-button2" title="Manhole/Node Inspections" <?php if ($council->sewer2 == '1') { ?> disabled<?php } ?> class="btn btn-default Three" style="margin-left: 35px;">MANHOLE</button><button id="storm-button2" title="Manhole/Node Inspections" <?php if ($council->storm2 == '1') { ?> disabled<?php } ?> class="btn btn-default Four">MANHOLE</button></li>
-                                        <li><button id="sewer-button3" title="Infiltration/Inflow Inspections" <?php if ($council->sewer3 == '1') { ?> disabled<?php } ?> class="btn btn-default Five" style="margin-left: 35px;">I / I</button><button id="storm-button3" title="Outlet Node Inspections" <?php if ($council->storm3 == '1') { ?> disabled<?php } ?> class="btn btn-default Six">OUTLET</button></li>
-                                        <li>
-                                            <input type="checkbox" name="networkcheck" class="regular-checkbox networkcheck" value="sw" id="network" style="display: none;">
-                                        </li>
-                                        <li class="divider"></li>
-                                        <!-- <li><h5 style="display: inline-block;margin-left: 15px;">Evaluation</h5></li> -->
-                                        <li>
-                                            <button id="evaluation-reports-button" class="btn btn-default" style=" padding-left: 4px; padding-right: 4px; padding-top: 2px; padding-bottom: 2px; margin-left: 15px;">Evaluation Reports</button>
-                                        </li>
-                                        <li class="divider"></li>
-                                        <div class="menu-item-radio" id="lblac-Evaluation1">
-                                            <input type="checkbox" name="gis_evaluation" class="regular-checkbox giseval" id="gis" style="margin-left: 15px;">
-                                            <label for="gis"><span style="display: inline-block;"> GIS Amendments</span>
-                                            </label>
-                                        </div>
-                                        <div class="menu-item-radio" id="lblac-Evaluation2">
-                                            <input type="checkbox" name="ip_evaluation" class="regular-checkbox ipeval" id="ip" style="margin-left: 15px;">
-                                            <label for="ip"><span style="display: inline-block;"> Infiltration Observations</span>
-                                            </label>
-                                        </div>
-                                        <div class="menu-item-radio" id="lblac-Evaluation3">
-                                            <input type="checkbox" name="prolat_evaluation" class="regular-checkbox prolateval" id="prolat" style="margin-left: 15px;">
-                                            <label for="prolat"><span style="display: inline-block;"> Protruding Laterals</span>
-                                            </label>
-                                        </div>
-                                        <div class="menu-item-radio" id="lblac-Evaluation4">
-                                            <input type="checkbox" name="root_evaluation" class="regular-checkbox rooteval" id="root" style="margin-left: 15px;">
-                                            <label for="root"><span style="display: inline-block;"> Root Removal</span>
-                                            </label>
-                                        </div>
-                                        <div class="menu-item-radio" id="lblac-Evaluation5">
-                                            <input type="checkbox" name="mhaccess_evaluation" class="regular-checkbox mhaccesseval" id="mhaccess" style="margin-left: 15px;">
-                                            <label for="mhaccess"><span style="display: inline-block;"> Manhole Improvements</span>
-                                            </label>
-                                        </div>
-                                        <div class="menu-item-radio" id="lblac-Evaluation6">
-                                            <input type="checkbox" name="remedial_evaluation" class="regular-checkbox remedialeval" id="remedial" style="margin-left: 15px;">
-                                            <label for="remedial"><span style="display: inline-block;"> Remedial Works</span>
-                                            </label>
-                                        </div>
-                                        <div class="menu-item-radio" id="lblac-Evaluation7">
-                                            <input type="checkbox" name="cctv_evaluation" class="regular-checkbox cctveval" id="cctv" style="margin-left: 15px;">
-                                            <label for="cctv"><span style="display: inline-block;"> CCTV Re-survey</span>
-                                            </label>
-                                        </div>
-                                        <div class="menu-item-radio" id="lblac-Evaluation8">
-                                            <input type="checkbox" name="renewal_evaluation" class="regular-checkbox renewaleval" id="renewal" style="margin-left: 15px;">
-                                            <label for="renewal"><span style="display: inline-block;"> Renewal Works</span>
-                                            </label>
-                                        </div>
+						<div class="collapse navbar-collapse" id="retic-navbar-collapse">
+						  <ul class="navigation nav navbar-nav navbar-right">
+							<li class="navigation-padding navigation-text" >
+								<h5 title="Start again" id="home-button"><span onclick="resetPage()">home</span></h5>
+							</li>
+							<li class="navigation-padding navigation-text">
+								<h5 title="Field data capture" id="webnav" v-on:click="hideUI"><span >webapp</span></h5>
+							</li>
+							<li class="navigation-padding navigation-text">
+								<a href="mailto:info@reticmanager.com"></a>
+								<h5 title="For support via email"  id="support-button"><a href="mailto:info@reticmanager.com"></a><a href="mailto:info@reticmanager.com" >support</a></h5>
+							</li>
+							<li class="navigation-padding navigation-text">
+								<h5 ><span  id="upload-button" title="Upload data to ReticManager" onclick="logout()">upload</span></h5>
+							</li>
+							<li class="navigation-padding navigation-text dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><h5  id="view-button">view<b class="caret"></b></h5></a>
+								<ul class="dropdown-menu" style="display: none; width: 140px; right: 0px;">
+									<div class="navigation-text-simple menu-item-radio" id="lblac-split-5050">
+										<input type="checkbox" name="split-5050-view" class="regular-checkbox split-5050" id="split-5050" style="margin-left: 15px;">
+										<label for="split-5050"><span style="display: inline-block;"> Split 50/50</span>
+										</label>
+									</div>
+									<div class="navigation-text-simple menu-item-radio" id="lblac-split-7525">
+										<input type="checkbox" name="split-7525-view" class="regular-checkbox split-7525" id="split-7525" style="margin-left: 15px;">
+										<label for="split-7525"><span style="display: inline-block;"> Split 75/25</span>
+										</label>
+									</div>
+									<div class="navigation-text-simple menu-item-radio" id="lblac-map-only">
+										<input type="checkbox" name="map-only-view" class="regular-checkbox map-only" id="map-only" style="margin-left: 15px;">
+										<label for="map-only"><span style="display: inline-block;"> Map</span>
+										</label>
+									</div>
+									<div class="navigation-text-simple menu-item-radio" id="lblac-table-only">
+										<input type="checkbox" name="table-only-view" class="regular-checkbox table-only" id="table-only" style="margin-left: 15px;">
+										<label for="table-only"><span style="display: inline-block;"> Table</span>
+										</label>
+									</div>
+								</ul>
+							</li>
+							<li class="navigation-padding navigation-text dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><h5 title="Show Legend" id="legend-button">legend<b class="caret"></b></h5></a>
+								<ul class="dropdown-menu" style="display: none; width: 275px; right: 0px;">
+									<li>
+										<h5 class="modal-title wastecolor" style="text-align: center;" id="myModalLabel">ReticManager - Legend</h5>
+									</li>
+									<li>
+										<div> <img src="<?php echo base_url('/assets/images/legend_v3.1.png') ?>" alt="online solution legend" style="width: auto; height: auto; padding: 2px">
+										</div>
+									</li>
+
+								</ul>
+							</li>
+							<li class="navigation-padding navigation-text dropdown">
+								<a href="<?php echo base_url('/account/logout') ?>"></a>
+								<h5  title="Logout of ReticManager" id="logout-button1"><a href="<?php echo base_url('/account/logout') ?>"></a><a href="<?php echo base_url('/account/logout') ?>">logout</a></h5>
+							</li>
+							<li id="menu-dropdown" class="navigation-padding navigation-text dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><h5  title="ReticManager Menu - Select a network to start" id="menu-button">menu<b class="caret"></b></h5></a>
+								<ul class="Retic-menu dropdown-menu " style="display: none;">
+									<li class="no-padding">
+										<h5 class="modal-title wastecolor" style="text-align: center;font-size: 1.0em;">ReticManager v3.1 Menu</h5>
+									</li>
+									<li class="no-padding">
+										<hr>
+									</li>
+									<li class="no-padding">
+										<h5 class="wastecolor" style="text-align: center;font-size: 0.875em;">SURVEY DATA</h5>
+									</li>
+									<li class="no-padding divider"></li>
+									<span><h5 style="text-align:center;"><b class="wastecolor">Sewer</b> &nbsp;&nbsp; <b class="stormcolor">Storm</b></h5></span>
+									<li class="no-padding"><button id="sewer-button1" title="CCTV Inspections" <?php if ($council->sewer1 == '1') { ?> disabled<?php } ?> class="btn btn-default One" style="margin-left: 35px;">CCTV</button><button id="storm-button1" title="CCTV Inspections" <?php if ($council->storm1 == '1') { ?> disabled<?php } ?> class="btn btn-default Two">CCTV</button></li>
+									<li class="no-padding"><button id="sewer-button2" title="Manhole/Node Inspections" <?php if ($council->sewer2 == '1') { ?> disabled<?php } ?> class="btn btn-default Three" style="margin-left: 35px;">MANHOLE</button><button id="storm-button2" title="Manhole/Node Inspections" <?php if ($council->storm2 == '1') { ?> disabled<?php } ?> class="btn btn-default Four">MANHOLE</button></li>
+									<li class="no-padding"><button id="sewer-button3" title="Infiltration/Inflow Inspections" <?php if ($council->sewer3 == '1') { ?> disabled<?php } ?> class="btn btn-default Five" style="margin-left: 35px;">I / I</button><button id="storm-button3" title="Outlet Node Inspections" <?php if ($council->storm3 == '1') { ?> disabled<?php } ?> class="btn btn-default Six">OUTLET</button></li>
+									<li class="no-padding">
+										<input type="checkbox" name="networkcheck" class="regular-checkbox networkcheck" value="sw" id="network" style="display: none;">
+									</li>
+									<li class="no-padding divider"></li>
+									<li class="no-padding">
+										<button id="evaluation-reports-button" class="Retic-menu-buttons btn btn-default"  >Evaluation Reports</button>
+									</li>
+									<li class="no-padding navigation-text-simple divider"></li>
+									<div class="navigation-text-simple menu-item-radio" id="lblac-Evaluation1">
+										<input type="checkbox" name="gis_evaluation" class="regular-checkbox giseval" id="gis" style="margin-left: 15px;">
+										<label for="gis"><span style="display: inline-block;"> GIS Amendments</span>
+										</label>
+									</div>
+									<div class="navigation-text-simple menu-item-radio" id="lblac-Evaluation2">
+										<input type="checkbox" name="ip_evaluation" class="regular-checkbox ipeval" id="ip" style="margin-left: 15px;">
+										<label for="ip"><span style="display: inline-block;"> Infiltration Observations</span>
+										</label>
+									</div>
+									<div class="navigation-text-simple menu-item-radio" id="lblac-Evaluation3">
+										<input type="checkbox" name="prolat_evaluation" class="regular-checkbox prolateval" id="prolat" style="margin-left: 15px;">
+										<label for="prolat"><span style="display: inline-block;"> Protruding Laterals</span>
+										</label>
+									</div>
+									<div class="navigation-text-simple menu-item-radio" id="lblac-Evaluation4">
+										<input type="checkbox" name="root_evaluation" class="regular-checkbox rooteval" id="root" style="margin-left: 15px;">
+										<label for="root"><span style="display: inline-block;"> Root Removal</span>
+										</label>
+									</div>
+									<div class="navigation-text-simple menu-item-radio" id="lblac-Evaluation5">
+										<input type="checkbox" name="mhaccess_evaluation" class="regular-checkbox mhaccesseval" id="mhaccess" style="margin-left: 15px;">
+										<label for="mhaccess"><span style="display: inline-block;"> Manhole Improvements</span>
+										</label>
+									</div>
+									<div class="navigation-text-simple menu-item-radio" id="lblac-Evaluation6">
+										<input type="checkbox" name="remedial_evaluation" class="regular-checkbox remedialeval" id="remedial" style="margin-left: 15px;">
+										<label for="remedial"><span style="display: inline-block;"> Remedial Works</span>
+										</label>
+									</div>
+									<div class="navigation-text-simple menu-item-radio" id="lblac-Evaluation7">
+										<input type="checkbox" name="cctv_evaluation" class="regular-checkbox cctveval" id="cctv" style="margin-left: 15px;">
+										<label for="cctv"><span style="display: inline-block;"> CCTV Re-survey</span>
+										</label>
+									</div>
+									<div class="navigation-text-simple menu-item-radio" id="lblac-Evaluation8">
+										<input type="checkbox" name="renewal_evaluation" class="regular-checkbox renewaleval" id="renewal" style="margin-left: 15px;">
+										<label for="renewal"><span style="display: inline-block;"> Renewal Works</span>
+										</label>
+									</div>
 
 
-                                        <li class="divider"></li>
-                                        <!-- <li><h5  style="display: inline-block;margin-left: 15px;">Reports</h5></li> -->
-                                        <li>
-                                            <button id="subdivision-reports-button" class="btn btn-default" style=" padding-left: 4px; padding-right: 4px; padding-top: 2px; padding-bottom: 2px; margin-left: 15px;">subdivision compliance reports</button>
-                                        </li>
-                                        <li class="divider"></li>
-                                        <div class="menu-item-radio" id="lblac-Subdivision">
-                                            <input type="checkbox" name="subdivisions" class="regular-checkbox subdivisions" id="subdivisions" style="margin-left: 15px;">
-                                            <label for="subdivisions"><span style="display: inline-block;"> Subdivisions</span>
-                                            </label>
-                                        </div>
-                                        <!-- 	<li><button id="evaluation-reports-button" class="btn btn-default" style=" padding-left: 4px; padding-right: 4px; padding-top: 2px; padding-bottom: 2px; margin-left: 15px;">Evaluation Reports</button></li>
-										<li><button id="subdivision-reports-button" class="btn btn-default" style=" padding-left: 4px; padding-right: 4px; padding-top: 2px; padding-bottom: 2px; margin-left: 15px;">subdivision compliance reports</button></li> -->
-                                    </ul>
-                                </li>
-                            </ul>
-
-							<ul class="pull-right nav">
-                            <li class="home">
-                                <a href="<?php echo base_url('/account/logout') ?>"></a>
-                                <h4 class="home" id="logout-button1"><a href="<?php echo base_url('/account/logout') ?>"></a><a href="<?php echo base_url('/account/logout') ?>" style="color: #ffffff;"> logout |  </a></h4>
-                            </li>
-                            </ul>
-                            <ul class="pull-right nav">
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><h4 style="color:#ffffff; " id="legend-button"> legend |  </h4></a>
-                                    <ul class="dropdown-menu" style="display: none; width: 275px; right: 0px;">
-                                        <li>
-                                            <h5 class="modal-title" style="color:#5796b4;text-align: center;" id="myModalLabel">ReticManager - Legend</h5>
-                                        </li>
-                                        <li>
-                                            <div> <img src="<?php echo base_url('/assets/images/legend_v3.1.png') ?>" alt="online solution legend" style="width: auto; height: auto; padding: 2px">
-                                            </div>
-                                        </li>
-
-                                    </ul>
-                                </li>
-                            </ul>
-                            <ul class="pull-right nav">
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><h4 style="color:#ffffff; " id="view-button"> view |  </h4></a>
-                                    <ul class="dropdown-menu" style="display: none; width: 140px; right: 0px;">
-                                        <div class="menu-item-radio" id="lblac-split-5050">
-                                            <input type="checkbox" name="split-5050-view" class="regular-checkbox split-5050" id="split-5050" style="margin-left: 15px;">
-                                            <label for="split-5050"><span style="display: inline-block;"> Split 50/50</span>
-                                            </label>
-                                        </div>
-                                        <div class="menu-item-radio" id="lblac-split-7525">
-                                            <input type="checkbox" name="split-7525-view" class="regular-checkbox split-7525" id="split-7525" style="margin-left: 15px;">
-                                            <label for="split-7525"><span style="display: inline-block;"> Split 75/25</span>
-                                            </label>
-                                        </div>
-                                        <div class="menu-item-radio" id="lblac-map-only">
-                                            <input type="checkbox" name="map-only-view" class="regular-checkbox map-only" id="map-only" style="margin-left: 15px;">
-                                            <label for="map-only"><span style="display: inline-block;"> Map</span>
-                                            </label>
-                                        </div>
-                                        <div class="menu-item-radio" id="lblac-table-only">
-                                            <input type="checkbox" name="table-only-view" class="regular-checkbox table-only" id="table-only" style="margin-left: 15px;">
-                                            <label for="table-only"><span style="display: inline-block;"> Table</span>
-                                            </label>
-                                        </div>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <li class="home">
-                                <h4 class="home"><span style="color:#ffffff;cursor:pointer" id="upload-button" onclick="logout()">| Upload | </span></h4>
-                            </li>
-                            <li class="home">
-                                <a href="mailto:info@reticmanager.com"></a>
-                                <h4 class="home" id="support-button"><a href="mailto:info@reticmanager.com"></a><a href="mailto:info@reticmanager.com" style="color: #ffffff;">| Support &nbsp;  </a></h4>
-                            </li>
-                            <div id="webnav">
-                            <li class="home">
-                                <h4 class="home" v-on:click="hideUI"><span style="color:#ffffff;cursor:pointer">| WebApp &nbsp;  </span></h4>
-                            </li>
-                          </div>
-                            <li class="home">
-                                <h4 class="home" id="home-button"><span style="color:#ffffff;cursor:pointer" onclick="resetPage()">| Home &nbsp;  </span></h4>
-                            </li>
-
-                        </ul>
-                    </div>
-                </div>
+									<li class="no-padding divider"></li>
+									<!-- <li><h5  style="display: inline-block;margin-left: 15px;">Reports</h5></li> -->
+									<li class="no-padding">
+										<button id="subdivision-reports-button" class="Retic-menu-buttons btn btn-default" >subdivision compliance reports</button>
+									</li>
+									<li class="no-padding divider"></li>
+									<div class="navigation-text-simple menu-item-radio" id="lblac-Subdivision">
+										<input type="checkbox" name="subdivisions" class="regular-checkbox subdivisions" id="subdivisions" style="margin-left: 15px;">
+										<label for="subdivisions"><span style="display: inline-block;"> Subdivisions</span>
+										</label>
+									</div>
+									<!-- 	<li><button id="evaluation-reports-button" class="btn btn-default" style=" padding-left: 4px; padding-right: 4px; padding-top: 2px; padding-bottom: 2px; margin-left: 15px;">Evaluation Reports</button></li>
+									<li><button id="subdivision-reports-button" class="btn btn-default" style=" padding-left: 4px; padding-right: 4px; padding-top: 2px; padding-bottom: 2px; margin-left: 15px;">subdivision compliance reports</button></li> -->
+								</ul>
+							</li>
+						  </ul>
+						</div><!-- /.navbar-collapse -->
+					  </div><!-- /.container-fluid -->
+					</nav>
+				</div>
             </div>
             <!-- #header -->
 
             <!-- /.navbar.navbar-default -->
             <!-- /.well -->
-            <div id="app">
-              <div v-if="layout">
-                <layout-cont></layout-cont>
-              </div>
-
-              <div v-if="map" class="well search">
+              <div class="well search">
                   <!-- /.col-md-13 -->
-                  <div class="col-md-13">
-                      <div id="map" class="leaflet-container leaflet-fade-anim" tabindex="0" style="position: relative;">
+                  <div class="col-md-12">
+                    <div id="vue-map">
+                      <div v-if="map" id="map" class="leaflet-container leaflet-fade-anim" tabindex="0" >
                           <div class="leaflet-map-pane" style="transform: translate3d(0px, 9px, 0px);">
                           </div>
                           <!-- /leaflet-map-pane> -->
@@ -285,6 +275,8 @@
                           </div>
                           <!-- /cartodb-infowindow -->
                       </div>
+                    </div>
+
                       <!-- leaflet-container leaflet-fade-anim -->
                   </div>
                   <!-- /.col-md-13 -->
@@ -298,11 +290,18 @@
                   <div id="footer"></div>
               </div>
               <!-- /.wrapper -->
-              <div v-if="help" style="width:800px; margin:0 auto;" class="inner"><img id="instructions" src="<?php echo base_url('/assets/images/basic_instructions.gif') ?>" alt="basic instrctions gif image" style="width: 95%;max-width: 1100px;  display: none">
+              <div id="vue-help">
+                <div v-if="help" style="max-width:1200px; margin:0 auto;" class="inner"><img id="instructions" src="<?php echo base_url('/assets/images/basic_instructions.gif') ?>" alt="basic instrctions gif image" style="width: 95%;max-width: 1100px;  display: none">
+                </div>
               </div>
-            </div>
 
+              <div id="vue-cont">
+                <div v-if="layout">
+                  <layout-cont></layout-cont>
+                </div>
+              </div>
         </div>
+      </div>
         <!-- /.container -->
 
         <!-- Modals -->
@@ -569,151 +568,122 @@
                 </div>
             </div>
         </div>
-        <script type="text/javascript">
-          var webapp = new Vue({
-            el: '#app',
-            data: {
-              map: true,
-              help: true,
-              layout: false
-            },
-            components: {
-              'layout-cont': {
-                template: '#form-layout',
-                data: function () {
-                  return {
-                    lat: "",
-                    long: ""
-                  }
-                },
-                methods: {
-                  getLocation: function () {
-                    if (navigator.geolocation) {
-                      navigator.geolocation.getCurrentPosition(this.showPosition);
-                    } else {
-                      alert('Geolocation not supported');
-                    }
-                  },
-                  showPosition: function (position) {
-                    this.lat = position.coords.latitude;
-                    this.long = position.coords.longitude;
-                  }
-                }
-              }
-            },
-            methods: {
-
-            }
-          })
-          var nav = new Vue({
-            el: '#webnav',
-            data: {
-            },
-            methods: {
-              hideUI: function (event) {
-                // hide UI on web-app nav selection
-                webapp.map = false;
-                webapp.help = false;
-                webapp.layout = true;
-              }
-            }
-          })
-        </script>
+        <script src="../assets/js/webapp.js" type="text/javascript"></script>
 
 <script type="text/x-template" id="form-layout">
-<div class="row cont-center">
-  <div class="col-sm-10 col-sm-offset-1">
-    <div class="col-sm-12">
-      <div class="form-group center">
-        <label for="inspection">Details</label>
-        <table class="table table-sm table-hover table-striped table-bordered">
-    <tbody>
-      <tr>
-        <th scope="row">Client Number:</th>
-        <td># 2001</td>
-      </tr>
-      <tr>
-        <th scope="row">ID Number:</th>
-        <td># 5001</td>
-      </tr>
-      <tr>
-          <th scope="row">Date:</th>
-        <td><?php echo date("d/m/Y");?></td>
-      </tr>
-      <tr>
-          <th scope="row">Time:</th>
-        <td><?php echo date("h:i:sa");?></td>
-      </tr>
-    </tbody>
-  </table>
-  <div class="form-group">
-    <label for="inspection">Inspection</label>
-    <select class="form-control" id="exampleFormControlSelect1">
-      <option>Manhole</option>
-      <option>Smoke</option>
-      <option>Connections</option>
-      <option>I / I</option>
-    </select>
-  </div>
+  <div class="row cont-center">
+    <div class="col-md-12 col-margins">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <div class="form-group center">
+            <h4>Details</h4>
+            <table class="table table-sm table-hover table-striped table-bordered">
+              <tbody>
+                <tr class="custom-height">
+                  <th scope="row">
+                    <h5>Client Number:</h5>
+                  </th>
+                  <td>
+                    <h5># 2001</h5>
+                  </td>
+                </tr>
+                <tr class="custom-height">
+                  <th scope="row">
+                    <h5>ID Number:</h5>
+                  </th>
+                  <td>
+                    <h5># 5001</h5>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <div class="form-group center">
+            <h4>Inspection</h4>
+            <select class="form-control custom-height">
+            <option>Manhole</option>
+            <option>Smoke</option>
+            <option>Connections</option>
+            <option>I / I</option>
+          </select>
+          </div>
+        </div>
+      </div>
+      <div class="row table-margin-top">
+        <div class="col-md-6 col-md-offset-3">
+          <div class="form-group center">
+            <table class="table table-sm table-hover table-striped table-bordered">
+              <tbody>
+                <tr class="custom-height">
+                  <th scope="row">
+                    <button @click="getDate" type="button" class="btn btn-primary webapp-buttons">
+                    <i class="fa fa-clock-o fa-size" aria-hidden="true"></i>
+                    <p>
+                      <span class="">Date / Time</span>
+                    </p>
+                  </button>
+                  </th>
+                  <td class=" custom-td-width">
+                    <h5>{{ date }}</h5>
+                  </td>
+                </tr>
+                <tr class="custom-height">
+                  <th scope="row">
+                    <button @click="getLocation" type="button" class="btn btn-primary webapp-buttons">
+                    <i class="fa fa-globe fa-size" aria-hidden="true"></i>
+                    <p>
+                      <span class="">GPS Co-ordinates</span>
+                    </p>
+                  </button>
+                  </th>
+                  <td class=" custom-td-width">
+                    <h5>Latitude: {{ lat }}</h5>
+                    <h5>Longitude: {{ long }}</h5>
+                  </td>
+                </tr>
+                <tr class="custom-height">
+                  <th scope="row">
+                    <div class="input-group">
+                      <label class="input-group-btn">
+                      <span class="btn btn-primary webapp-buttons" style="border-radius: 4px;">
+                            <i class="fa fa-camera fa-size image-input-icons" aria-hidden="true"></i><p><span class="">Image 1</span></p>
+                        <input id="inputOne" ref="inputOne" v-on:change="imageOne" style="display: none;" type="file" accept="image/*">
+                        </span>
+                      </label>
+                    </div>
+                  </th>
+                  <td class=" custom-td-width">
+                    <h5>Name: {{ images[0] }}</h5>
+                    <h5>Size: {{ images[1] }}</h5>
+                  </td>
+                </tr>
+                <tr class="custom-height">
+                  <th scope="row">
+                    <div class="input-group">
+                      <label class="input-group-btn">
+                          <span class="btn btn-primary webapp-buttons" style="border-radius: 4px;">
+                                <i class="fa fa-camera fa-size image-input-icons" aria-hidden="true"></i><p><span class="">Image 2</span></p>
+                            <input id="inputTwo" ref="inputTwo" v-on:change="imageTwo" style="display: none;" type="file" accept="image/*">
+                            </span>
+                          </label>
+                    </div>
+                  </th>
+                  <td class=" custom-td-width">
+                    <h5>Name: {{ images[2] }}</h5>
+                    <h5>Size: {{ images[3] }}</h5>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="col-sm-5">
-                <div class="col-sm-12">
-                  <div class="square-service-block">
-                     <a v-on:click="getLocation">
-                       <div class="ssb-icon"><i class="fa fa-globe" aria-hidden="true"></i></div>
-                       <h2 class="ssb-title">GPS</h2>
-                     </a>
-                  </div>
-                </div>
-
-                <div class="col-sm-12">
-                  <div class="square-service-block">
-                     <a href="#">
-                       <div class="ssb-icon"><i class="fa fa-camera" aria-hidden="true"></i></div>
-                       <h2 class="ssb-title">Add Image</h2>
-                     </a>
-                  </div>
-                </div>
-
-                <div class="col-sm-12">
-                  <div class="square-service-block">
-                     <a href="#">
-                       <div class="ssb-icon"><i class="fa fa-camera" aria-hidden="true"></i></div>
-                       <h2 class="ssb-title">Add Image</h2>
-                     </a>
-                  </div>
-                </div>
-    </div>
-    <div class="col-sm-7">
-                <div class="col-sm-12">
-                  <div class="square-info-block">
-                    <pre>{{ $data }}</pre>
-                  </div>
-                </div>
-
-                <div class="col-sm-12">
-                  <div class="square-info-block">
-                     <a href="#">
-                       <div class="ssb-icon-info"></div>
-                       <!-- <h2 class="ssb-title-info">GPS</h2> -->
-                     </a>
-                  </div>
-                </div>
-
-                <div class="col-sm-12">
-                  <div class="square-info-block">
-                     <a href="#">
-                       <div class="ssb-icon-info"></div>
-                       <!-- <h2 class="ssb-title-info">GPS</h2> -->
-                     </a>
-                  </div>
-                </div>
-
-    </div>
-
   </div>
-
 </div>
 </script>
 
