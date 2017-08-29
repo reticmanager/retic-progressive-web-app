@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="css/main-mimiUpdated2017_review.css">
   <link rel="stylesheet" href="css/webapp.css">
- </head>
+</head>
 
 <body>
   <div id="app">
@@ -19,7 +19,7 @@
         <div class="row">
           <div class="col-md-6 col-md-offset-3">
             <div class="form-group center">
-			<img alt="reticmanager logo" src="images/RMLogo215x40.png" style="padding: 5px; width: 215px; height: auto;">
+              <img alt="reticmanager logo" src="images/RMLogo215x40.png" style="padding: 5px; width: 215px; height: auto;">
               <table class="table table-sm table-hover table-striped table-bordered">
                 <tbody>
                   <tr class="custom-height">
@@ -54,7 +54,7 @@
             <div class="form-group center">
               <table class="table table-sm table-hover table-striped table-bordered">
                 <tbody>
-				   <tr class="custom-height">
+                  <tr class="custom-height">
                     <th scope="row">
                       <button @click="getDate" type="button" class="btn btn-primary webapp-buttons">
   										<i class="fa fa-clock-o fa-size" aria-hidden="true"></i>
@@ -93,8 +93,8 @@
                       </div>
                     </th>
                     <td class=" custom-td-width">
-						<img :src="image" />
-						<button @click="removeImage">Remove image</button>
+                      <img :src="image" />
+                      <button @click="removeImage">Remove image</button>
                     </td>
                   </tr>
                   <tr class="custom-height">
@@ -114,54 +114,61 @@
                     </td>
                   </tr>
                 </tbody>
-				</div>
-              </table>
-			</div>
-			<div id="mh-details-table" class="form-group center">
-				<div v-if="selected === 'selected'">
-				</div>
-				<div v-else-if="selected === 'Manhole'">
-				  <table class="table table-sm table-hover table-striped table-bordered">
-					<tbody>
-					  <tr class="custom-height">
-						<th scope="row"><h5>Survey ID</h5></th>
-						<td class=" custom-td-width"><input class="form-control custom-height custom-td-width" type="text" placeholder="  Survey ID"></td>
-					 </tr>
-					  <tr class="custom-height">
-						<th scope="row"><h5>Asset ID</h5></th>
-						<td class=" custom-td-width"><input class="form-control custom-height custom-td-width" type="text" placeholder="  Asset ID"></td>
-					 </tr>
-					 <tr class="custom-height">		
-						<th scope="row"><h5>Network</h5></th>
-						<td class=" custom-td-width"><select id="network" class="form-control custom-height custom-td-width" placeholder="select">
+            </div>
+            </table>
+          </div>
+          <div id="mh-details-table" class="form-group center">
+            <div v-if="selected === 'selected'">
+            </div>
+            <div v-else-if="selected === 'Manhole'">
+              <table class="table table-sm table-hover table-striped table-bordered">
+                <tbody>
+                  <tr class="custom-height">
+                    <th scope="row">
+                      <h5>Survey ID</h5></th>
+                    <td class=" custom-td-width"><input class="form-control custom-height custom-td-width" type="text" placeholder="  Survey ID"></td>
+                  </tr>
+                  <tr class="custom-height">
+                    <th scope="row">
+                      <h5>Asset ID</h5></th>
+                    <td class=" custom-td-width"><input class="form-control custom-height custom-td-width" type="text" placeholder="  Asset ID"></td>
+                  </tr>
+                  <tr class="custom-height">
+                    <th scope="row">
+                      <h5>Network</h5></th>
+                    <td class=" custom-td-width"><select id="network" class="form-control custom-height custom-td-width" placeholder="select">
 						<option>Sewage</option>
 						<option>Storm</option>
   						<option>Combined</option>
   						<option>Other</option>
   					</select></td>
-					 </tr>
-					 <tr class="custom-height">	
-						<th scope="row"><h5>Located Status</h5></th>
-						<td class=" custom-td-width"><select id="located_status" class="form-control custom-height custom-td-width" placeholder="select">
+                  </tr>
+                  <tr class="custom-height">
+                    <th scope="row">
+                      <h5>Located Status</h5></th>
+                    <td class=" custom-td-width"><select id="located_status" class="form-control custom-height custom-td-width" placeholder="select">
 						<option>Located</option>
 						<option>Buried</option>
   						<option>New</option>
   						<option>Not on GIS</option>
   					</select></td>
-					 </tr>
-					 <tr class="custom-height">		
-						<th scope="row"><h5>Street No</h5></th>
-						<td class=" custom-td-width"><input class=" form-control custom-height custom-td-width" type="text" placeholder="  Street #"></td>
-	
-					 </tr>
-					 <tr class="custom-height">		
-						<th scope="row"><h5>Street Name</h5></th>
-						<td class=" custom-td-width"><input class=" form-control custom-height custom-td-width" type="text" placeholder="  Street"></td>
-	
-					 </tr>
-					 <tr class="custom-height">	
-						<th scope="row"><h5>Node Diameter</h5></th>
-						<td class=" custom-td-width"><select id="located_status" class="form-control custom-height custom-td-width" placeholder="select">
+                  </tr>
+                  <tr class="custom-height">
+                    <th scope="row">
+                      <h5>Street No</h5></th>
+                    <td class=" custom-td-width"><input class=" form-control custom-height custom-td-width" type="text" placeholder="  Street #"></td>
+
+                  </tr>
+                  <tr class="custom-height">
+                    <th scope="row">
+                      <h5>Street Name</h5></th>
+                    <td class=" custom-td-width"><input class=" form-control custom-height custom-td-width" type="text" placeholder="  Street"></td>
+
+                  </tr>
+                  <tr class="custom-height">
+                    <th scope="row">
+                      <h5>Node Diameter</h5></th>
+                    <td class=" custom-td-width"><select id="node_diameter" class="form-control custom-height custom-td-width" placeholder="select">
 						<option>1050</option>
 						<option>1200</option>
   						<option>1400</option>
@@ -174,24 +181,18 @@
 						<option>3000</option>
 						<option>3200</option>
   					</select></td>
-					</tr>
-					 
-					</tbody>
-					</div>
-				  </table>
-				 </div> 
-			</div>
+                  </tr>
+
+                </tbody>
+            </div>
+            </table>
           </div>
         </div>
       </div>
     </div>
-
-
-
+  </div>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.2/vue.js"></script>
-  <script type="text/javascript" src="js/webapp.js">
-  </script>
-
+  <script type="text/javascript" src="js/webapp.js"></script>
 </body>
 
 </html>

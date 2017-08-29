@@ -1,12 +1,12 @@
 
-var ap = new Vue({
+new Vue({
 	el: '#app',
 	data: {
 		lat: "",
 		long: "",
 		date: "",
 		images: [],
-		image: '',
+		image: "",
 		selected: "selected",
 		selected2: "selected",
 		rowId: 10,
@@ -29,7 +29,6 @@ var ap = new Vue({
 		imageOne: function() {
 			var x = this.$refs.inputOne;
 			this.getImageDetails(x);
-
 		},
 		imageTwo: function() {
 			var x = this.$refs.inputTwo;
@@ -37,12 +36,12 @@ var ap = new Vue({
 		},
 		getImageDetails: function(x) {
 			var array = this.images;
-			  
+
 			if ('files' in x) {
 				if (x.files.length == 0) {
 					console.log("Select one or more files.");
 				} else {
-					
+
 					for (var i = 0; i < x.files.length; i++) {
 						var file = x.files[i];
 						var image = new Image();
@@ -87,4 +86,3 @@ var ap = new Vue({
 		}
 	}
 })
-
