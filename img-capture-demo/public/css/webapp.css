@@ -53,11 +53,8 @@ input.form-control {
   display: inline;
 }
 img {
-  width: 10%;
+  width: 20%;
   margin: auto;
   display: block;
   margin-bottom: 2px;
-}
-button {
-
 }
