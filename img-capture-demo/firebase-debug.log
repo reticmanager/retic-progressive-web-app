@@ -1,0 +1,36 @@
+[debug] [2017-08-28T21:08:38.395Z] ----------------------------------------------------------------------
+[debug] [2017-08-28T21:08:38.398Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Videncode1\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase serve
+[debug] [2017-08-28T21:08:38.398Z] CLI Version:   3.9.2
+[debug] [2017-08-28T21:08:38.398Z] Platform:      win32
+[debug] [2017-08-28T21:08:38.398Z] Node Version:  v6.11.2
+[debug] [2017-08-28T21:08:38.399Z] Time:          Tue Aug 29 2017 09:08:38 GMT+1200 (New Zealand Standard Time)
+[debug] [2017-08-28T21:08:38.399Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2017-08-28T21:08:38.410Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2017-08-28T21:08:38.411Z] > authorizing via signed-in user
+[debug] [2017-08-28T21:08:38.413Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2017-08-28T21:08:38.413Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token { refresh_token: '1/K5_2Il1LXuyebsm4wt5n-Rk_kaE2BT5F6h5ZBSF8cIs',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Tue Aug 29 2017 09:08:38 GMT+1200 (New Zealand Standard Time)
+[debug] [2017-08-28T21:08:38.746Z] <<< HTTP RESPONSE 200
+[debug] [2017-08-28T21:08:38.752Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/reticmanager-demo  
+ Tue Aug 29 2017 09:08:38 GMT+1200 (New Zealand Standard Time)
+[debug] [2017-08-28T21:08:40.200Z] <<< HTTP RESPONSE 200
+[debug] [2017-08-28T21:08:40.200Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/reticmanager-demo/tokens  
+ Tue Aug 29 2017 09:08:40 GMT+1200 (New Zealand Standard Time)
+[debug] [2017-08-28T21:08:41.072Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from 'C:\Users\Videncode1\Desktop\GitHub\retic-progressive-web-app\img-capture-demo'...
+[info] 
+[debug] [2017-08-28T21:08:41.079Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/reticmanager-demo  
+ Tue Aug 29 2017 09:08:41 GMT+1200 (New Zealand Standard Time)
+[debug] [2017-08-28T21:08:42.692Z] <<< HTTP RESPONSE 200
+[debug] [2017-08-28T21:08:42.692Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/705888684245/clients/_:getWebAppConfig  
+ Tue Aug 29 2017 09:08:42 GMT+1200 (New Zealand Standard Time)
+[debug] [2017-08-28T21:08:44.242Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: public
+[info] +  hosting: Local server: http://localhost:5000
+

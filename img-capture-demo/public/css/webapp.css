@@ -7,8 +7,8 @@ margin-top: 20%;
 }
 
 .webapp-buttons {
-  height: 120px;
-  width: 140px;
+  height: auto;
+  width: 60px;
 }
 
 .col-margins {
@@ -31,15 +31,18 @@ margin-top: 20%;
 
 .fa-size {
   font-size: 3em;
-  margin-bottom: 0.5em;
+  /*margin-bottom: 0.5em;*/
 }
 
 select.form-control {
-  width: 100%;
+  width: 100%!important;
+}
+input.form-control {
+  width: 100%!important;
 }
 
 .custom-height {
-  height: 4em;
+  height: 3em;
 }
 
 .center {
@@ -48,4 +51,10 @@ select.form-control {
 
 .cont-center {
   display: inline;
+}
+img {
+  width: 20%;
+  margin: auto;
+  display: block;
+  margin-bottom: 2px;
 }
