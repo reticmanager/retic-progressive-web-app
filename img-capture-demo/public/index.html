@@ -39,13 +39,11 @@
           <div class="col-md-6 col-md-offset-3">
             <div class="form-group center">
               <h4>Inspection Type</h4>
-              <select @change="changeItem(rowId, $event)" id="inspection" class="form-control custom-height" placeholder="select">
-						<option>Select</option>
-						<option>Manhole</option>
-  						<option>Infiltration / Inflow</option>
-  						<option>Connections</option>
-  						<option>Other</option>
-  					</select>
+              <!-- Required parent div container -->
+              <div>
+                <!-- Custom inspection dropdown template -->
+                <inspection-dropdown v-on:option="addCond"></inspection-dropdown>
+              </div>
             </div>
           </div>
         </div>
@@ -57,11 +55,11 @@
                   <tr class="custom-height">
                     <th scope="row">
                       <button @click="getDate" type="button" class="btn btn-primary webapp-buttons">
-  										<i class="fa fa-clock-o fa-size" aria-hidden="true"></i>
-  										<p>
-  											<span class="">Date / Time</span>
-  										</p>
-  									</button>
+  												<i class="fa fa-clock-o fa-size" aria-hidden="true"></i>
+  												<p>
+  													<span class="">Date / Time</span>
+  												</p>
+  											</button>
                     </th>
                     <td class=" custom-td-width">
                       <h5>{{ date }}</h5>
@@ -70,11 +68,11 @@
                   <tr class="custom-height">
                     <th scope="row">
                       <button @click="getLocation" type="button" class="btn btn-primary webapp-buttons">
-  										<i class="fa fa-globe fa-size" aria-hidden="true"></i>
-  										<p>
-  											<span class="">GPS</span>
-  										</p>
-  									</button>
+  												<i class="fa fa-globe fa-size" aria-hidden="true"></i>
+  												<p>
+  													<span class="">GPS</span>
+  												</p>
+  											</button>
                     </th>
                     <td class=" custom-td-width">
                       <h5>Latitude: {{ lat }}</h5>
@@ -85,11 +83,14 @@
                     <th scope="row">
                       <div class="input-group">
                         <label class="input-group-btn">
-  											<span class="btn btn-primary webapp-buttons" style="border-radius: 4px;">
-                              <i class="fa fa-camera fa-size image-input-icons" aria-hidden="true"></i><p><span class="">Image 1</span></p>
-  												<input id="inputOne" ref="inputOne" v-on:change="imageOne" style="display: none;" type="file" accept="image/*">
-  												</span>
-  											</label>
+  													<span class="btn btn-primary webapp-buttons" style="border-radius: 4px;">
+  														<i class="fa fa-camera fa-size image-input-icons" aria-hidden="true"></i>
+  														<p>
+  															<span class="">Image 1</span>
+  														</p>
+  														<input id="inputOne" ref="inputOne" v-on:change="imageOne" style="display: none;" type="file" accept="image/*">
+  														</span>
+  													</label>
                       </div>
                     </th>
                     <td class=" custom-td-width">
@@ -101,11 +102,14 @@
                     <th scope="row">
                       <div class="input-group">
                         <label class="input-group-btn">
-      											<span class="btn btn-primary webapp-buttons" style="border-radius: 4px;">
-                                  <i class="fa fa-camera fa-size image-input-icons" aria-hidden="true"></i><p><span class="">Image 2</span></p>
-      												<input id="inputTwo" ref="inputTwo" v-on:change="imageTwo" style="display: none;" type="file" accept="image/*">
-      												</span>
-      											</label>
+  														<span class="btn btn-primary webapp-buttons" style="border-radius: 4px;">
+  															<i class="fa fa-camera fa-size image-input-icons" aria-hidden="true"></i>
+  															<p>
+  																<span class="">Image 2</span>
+  															</p>
+  															<input id="inputTwo" ref="inputTwo" v-on:change="imageTwo" style="display: none;" type="file" accept="image/*">
+  															</span>
+  														</label>
                       </div>
                     </th>
                     <td class=" custom-td-width">
@@ -114,85 +118,112 @@
                     </td>
                   </tr>
                 </tbody>
+              </table>
             </div>
-            </table>
           </div>
           <div id="mh-details-table" class="form-group center">
-            <div v-if="selected === 'selected'">
-            </div>
-            <div v-else-if="selected === 'Manhole'">
+            <div v-if="manHole">
               <table class="table table-sm table-hover table-striped table-bordered">
                 <tbody>
                   <tr class="custom-height">
                     <th scope="row">
-                      <h5>Survey ID</h5></th>
-                    <td class=" custom-td-width"><input class="form-control custom-height custom-td-width" type="text" placeholder="  Survey ID"></td>
+                      <h5>Survey ID</h5>
+                    </th>
+                    <td class=" custom-td-width">
+                      <input class="form-control custom-height custom-td-width" type="text" placeholder="  Survey ID">
+                    </td>
                   </tr>
                   <tr class="custom-height">
                     <th scope="row">
-                      <h5>Asset ID</h5></th>
-                    <td class=" custom-td-width"><input class="form-control custom-height custom-td-width" type="text" placeholder="  Asset ID"></td>
+                      <h5>Asset ID</h5>
+                    </th>
+                    <td class=" custom-td-width">
+                      <input class="form-control custom-height custom-td-width" type="text" placeholder="  Asset ID">
+                    </td>
                   </tr>
                   <tr class="custom-height">
                     <th scope="row">
-                      <h5>Network</h5></th>
-                    <td class=" custom-td-width"><select id="network" class="form-control custom-height custom-td-width" placeholder="select">
-						<option>Sewage</option>
-						<option>Storm</option>
-  						<option>Combined</option>
-  						<option>Other</option>
-  					</select></td>
+                      <h5>Network</h5>
+                    </th>
+                    <td class=" custom-td-width">
+                      <select id="network" class="form-control custom-height custom-td-width" placeholder="select">
+  																<option>Sewage</option>
+  																<option>Storm</option>
+  																<option>Combined</option>
+  																<option>Other</option>
+  															</select>
+                    </td>
                   </tr>
                   <tr class="custom-height">
                     <th scope="row">
-                      <h5>Located Status</h5></th>
-                    <td class=" custom-td-width"><select id="located_status" class="form-control custom-height custom-td-width" placeholder="select">
-						<option>Located</option>
-						<option>Buried</option>
-  						<option>New</option>
-  						<option>Not on GIS</option>
-  					</select></td>
+                      <h5>Located Status</h5>
+                    </th>
+                    <td class=" custom-td-width">
+                      <select id="located_status" class="form-control custom-height custom-td-width" placeholder="select">
+  																<option>Located</option>
+  																<option>Buried</option>
+  																<option>New</option>
+  																<option>Not on GIS</option>
+  															</select>
+                    </td>
                   </tr>
                   <tr class="custom-height">
                     <th scope="row">
-                      <h5>Street No</h5></th>
-                    <td class=" custom-td-width"><input class=" form-control custom-height custom-td-width" type="text" placeholder="  Street #"></td>
-
+                      <h5>Street No</h5>
+                    </th>
+                    <td class=" custom-td-width">
+                      <input class=" form-control custom-height custom-td-width" type="text" placeholder="  Street #">
+                    </td>
                   </tr>
                   <tr class="custom-height">
                     <th scope="row">
-                      <h5>Street Name</h5></th>
-                    <td class=" custom-td-width"><input class=" form-control custom-height custom-td-width" type="text" placeholder="  Street"></td>
-
+                      <h5>Street Name</h5>
+                    </th>
+                    <td class=" custom-td-width">
+                      <input class=" form-control custom-height custom-td-width" type="text" placeholder="  Street">
+                    </td>
                   </tr>
                   <tr class="custom-height">
                     <th scope="row">
-                      <h5>Node Diameter</h5></th>
-                    <td class=" custom-td-width"><select id="node_diameter" class="form-control custom-height custom-td-width" placeholder="select">
-						<option>1050</option>
-						<option>1200</option>
-  						<option>1400</option>
-						<option>1500</option>
-						<option>1650</option>
-						<option>1800</option>
-						<option>2050</option>
-						<option>2300</option>
-						<option>2550</option>
-						<option>3000</option>
-						<option>3200</option>
-  					</select></td>
+                      <h5>Node Diameter</h5>
+                    </th>
+                    <td class=" custom-td-width">
+                      <select id="node_diameter" class="form-control custom-height custom-td-width" placeholder="select">
+  																		<option>1050</option>
+  																		<option>1200</option>
+  																		<option>1400</option>
+  																		<option>1500</option>
+  																		<option>1650</option>
+  																		<option>1800</option>
+  																		<option>2050</option>
+  																		<option>2300</option>
+  																		<option>2550</option>
+  																		<option>3000</option>
+  																		<option>3200</option>
+  																	</select>
+                    </td>
                   </tr>
-
                 </tbody>
+              </table>
             </div>
-            </table>
           </div>
         </div>
       </div>
     </div>
+
+    <pre>{{$data}}</pre>
+
   </div>
+  <!-- Templates -->
+  <script type="text/x-template" id="inspection">
+    <select v-model="selected" class="form-control custom-height" placeholder="select">
+        <option v-for="(option, index) in options"> {{ option }} </option>
+      </select>
+  </script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.2/vue.js"></script>
   <script type="text/javascript" src="js/webapp.js"></script>
+
+
 </body>
 
 </html>
