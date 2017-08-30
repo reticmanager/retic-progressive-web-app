@@ -1,12 +1,20 @@
 new Vue({
   el: '#app',
   data: {
-    lat: "",
-    long: "",
     date: "",
     images: [],
     image: "",
     manHole: false,
+    gps: {
+      lat: "",
+      long: "",
+      accuracy: "",
+      altitude: "",
+      altAccuracy: "",
+      heading: "",
+      speed: "",
+      timestamp: ""
+    },
     selected: {
       type: "",
       network: "",
@@ -47,11 +55,8 @@ new Vue({
   },
   methods: {
     optionSelect: function() {
-      if (this.selected.type == "Manhole") {
-        this.manHole = true;
-      } else {
-        return this.manHole = false;
-      }
+      // Check if manhole is selected onchange, hide unhide ui
+      return (this.selected.type == "Manhole") ? this.manHole = true : this.manHole = false;
     },
     getLocation: function() {
       if (navigator.geolocation) {
@@ -61,8 +66,14 @@ new Vue({
       }
     },
     showPosition: function(position) {
-      this.lat = position.coords.latitude;
-      this.long = position.coords.longitude;
+      this.gps.lat = position.coords.latitude;
+      this.gps.long = position.coords.longitude;
+      this.gps.accuracy = position.coords.accuracy;
+      this.gps.altitude = position.coords.altitude;
+      this.gps.altAccuracy = position.coords.altitudeAccuracy;
+      this.gps.heading = position.coords.heading;
+      this.gps.speed = position.coords.speed;
+      this.gps.timestamp = position.coords.timestamp;
     },
     getDate: function() {
       return this.date = Date();
