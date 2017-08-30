@@ -6,42 +6,52 @@ new Vue({
     date: "",
     images: [],
     image: "",
-		childSelected: "",
-    manHole: false
-  },
-  components: {
-    'inspection-dropdown': {
-      template: '#inspection',
-			props: ['value'],
-      data: function() {
-        return {
-          options: [
-            "Manhole",
-            "Infiltration / Inflow",
-            "Connections",
-            "Other"
-          ]
-        }
-      },
-      computed: {
-        selected: {
-          get: function(value) {
-            return this.value
-          },
-          set: function(value) {
-            this.$emit('option', value);
-          }
-        }
-      }
-    }
+    manHole: false,
+    selected: {
+      type: "",
+      network: "",
+      status: "",
+      diameter: ""
+    },
+    types: [
+      "Manhole",
+      "Infiltration / Inflow",
+      "Connections",
+      "Other"
+    ],
+    networks: [
+      "Sewage",
+      "Storm",
+      "Combined",
+      "Other"
+    ],
+    statuses: [
+      "Located",
+      "Buried",
+      "New",
+      "Not on GIS"
+    ],
+    diameters: [
+      "1050",
+      "1200",
+      "1400",
+      "1500",
+      "1650",
+      "1800",
+      "2050",
+      "2300",
+      "2550",
+      "3000",
+      "3200"
+    ]
   },
   methods: {
-    addCond: function(value) {
-			this.childSelected = value;
-			console.log(value);
-			if (value == "Manhole") {
-				this.manHole = true;
-			}
+    optionSelect: function() {
+      if (this.selected.type == "Manhole") {
+        this.manHole = true;
+      } else {
+        return this.manHole = false;
+      }
     },
     getLocation: function() {
       if (navigator.geolocation) {
