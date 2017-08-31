@@ -1,14 +1,18 @@
+.final-buttons {
+  margin: 5px;
+}
+
 .btn:hover {
   transform: none;
 }
 
 .image-input-icons {
-margin-top: 20%;
+  margin-top: 20%;
 }
 
 .webapp-buttons {
   height: auto;
-  width: 60px;
+  width: 100%;
 }
 
 .col-margins {
@@ -37,6 +41,7 @@ margin-top: 20%;
 select.form-control {
   width: 100%!important;
 }
+
 input.form-control {
   width: 100%!important;
 }
@@ -52,6 +57,7 @@ input.form-control {
 .cont-center {
   display: inline;
 }
+
 img {
   width: 20%;
   margin: auto;

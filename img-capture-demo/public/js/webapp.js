@@ -3,7 +3,6 @@ new Vue({
   data: {
     date: "",
     images: [],
-    image: "",
     manHole: false,
     gps: {
       lat: "",
@@ -53,6 +52,11 @@ new Vue({
       "3200"
     ]
   },
+  components: {
+    'image-container': {
+      template: '#image-container'
+    }
+  },
   methods: {
     optionSelect: function() {
       // Check if manhole is selected onchange, hide unhide ui
@@ -66,6 +70,7 @@ new Vue({
       }
     },
     showPosition: function(position) {
+      console.log(position);
       this.gps.lat = position.coords.latitude;
       this.gps.long = position.coords.longitude;
       this.gps.accuracy = position.coords.accuracy;
@@ -78,63 +83,29 @@ new Vue({
     getDate: function() {
       return this.date = Date();
     },
-    imageOne: function() {
+    getImage: function() {
       var x = this.$refs.inputOne;
       this.getImageDetails(x);
     },
-    imageTwo: function() {
-      var x = this.$refs.inputTwo;
-      this.getImageDetails(x)
-    },
     getImageDetails: function(x) {
       var array = this.images;
+      var reader = new FileReader();
 
       if ('files' in x) {
         if (x.files.length == 0) {
           console.log("Select one or more files.");
         } else {
-
           for (var i = 0; i < x.files.length; i++) {
-            var file = x.files[i];
-            var image = new Image();
-            var reader = new FileReader();
-            var vm = this;
             reader.onload = (x) => {
-              vm.image = x.target.result;
+              array.push(x.target.result);
             };
-            reader.readAsDataURL(file);
-            if ('name' in file) {
-              array.push(file.name);
-            }
-            if ('webkitRelativePath' in file) {
-              array.push(file.webkitRelativePath);
-            }
+            reader.readAsDataURL(x.files[i]);
           }
         }
       }
     },
-    onFileChange(e) {
-      var files = e.target.files || e.dataTransfer.files;
-      if (!files.length)
-        return;
-      this.createImage(files[0]);
-    },
-    createImage(file) {
-      var image = new Image();
-      var reader = new FileReader();
-      var vm = this;
-
-      reader.onload = (e) => {
-        vm.image = e.target.result;
-      };
-      reader.readAsDataURL(file);
-    },
     removeImage: function(e) {
       this.image = '';
-    },
-    changeItem: function changeItem(rowId, event) {
-      this.selected2 = rowId + ", " + event.target.value;
-      this.selected = event.target.value;
     }
   }
 })
