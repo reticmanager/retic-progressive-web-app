@@ -1,0 +1,66 @@
+.final-buttons {
+  margin: 5px;
+}
+
+.btn:hover {
+  transform: none;
+}
+
+.image-input-icons {
+  margin-top: 20%;
+}
+
+.webapp-buttons {
+  height: auto;
+  width: 100%;
+}
+
+.col-margins {
+  margin-left: 50px;
+  margin-right: 50px
+}
+
+.custom-td-width {
+  width: 100%;
+}
+
+.table-margin-top {
+  margin-top: 2em;
+}
+
+.rwo-margins {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.fa-size {
+  font-size: 3em;
+  /*margin-bottom: 0.5em;*/
+}
+
+select.form-control {
+  width: 100%!important;
+}
+
+input.form-control {
+  width: 100%!important;
+}
+
+.custom-height {
+  height: 3em;
+}
+
+.center {
+  text-align: center;
+}
+
+.cont-center {
+  display: inline;
+}
+
+img {
+  width: 20%;
+  margin: auto;
+  display: block;
+  margin-bottom: 2px;
+}
