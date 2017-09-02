@@ -96,6 +96,6 @@ function progressBar(data){
 	}
 }
 var c = document.createElement('div');
-c.innerHTML = "Developed by cgnetwork.nz@gmail.com";
+c.innerHTML = "Developed by Chaz Goodare";
 c.style = "position: absolute;bottom: 15px;right: 15px;font-size: 12px;color: #666;"
 document.body.appendChild(c);
