@@ -1,0 +1,92 @@
+body {
+	background: #DBDCDD;
+	margin: 0;
+	padding: 0;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.hide {
+	display: none;
+}
+#drop {
+	position: absolute;
+	top: 50px;
+	bottom: 50px;
+	left: 50px;
+	right: 50px;
+	background: #F1F1F1;
+	border: 3px solid #F1F1F1;
+	background-image: url('');
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 150px;
+	cursor: pointer;
+}
+#drop.hover {
+	border-color: #39F;
+}
+#bd {
+	pointer-events: none;
+	display: none;
+	height: 100%;
+	width: 100%;
+	background: #39F;
+	opacity: .4;
+}
+#drop.hover #bd {
+	display: block;
+}
+#tip {
+	pointer-events: none;
+	position: absolute;
+  	bottom: 30%;
+	width: 100%;
+	font-size: 18px;
+	color: #666;
+	text-align: center;
+}
+#window {
+	position: absolute;
+  	top: 50%;
+  	transform: translateY(-50%);
+	margin: auto;
+	left: 0;
+	right: 0;
+	width: 500px;
+	background: #F1F1F1;
+	text-align: center;
+}
+#complete {
+	font-size: 22px;
+	font-weight: bold;
+	padding: 100px 20px;
+}
+#title {
+	font-size: 18px;
+	margin: 40px 15px;
+}
+#bar {
+	position: relative;
+	margin: auto;
+	width: 450px;
+	height: 70px;
+	margin-bottom: 25px;
+	background: #FFF;
+	border: 1px solid #999;
+}
+#insideBar {
+	height: 100%;
+	width: 0;
+	background: #39F;
+}
+#barNumber {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	font-size: 24px;
+	font-weight: bold;
+	line-height: 70px; /* bars height */
+}
+#fileInput {
+	display: none;
+}
