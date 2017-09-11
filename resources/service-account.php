@@ -103,33 +103,73 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   $storeFolder = 'file-uploads';
 
-  $tempFile = $_FILES['retic']['tmp_name'];
+  if (!empty($_FILES)) {
 
-  $targetPath = dirname( __FILE__ ) . $ds. $storeFolder . $ds;
+      $tempFile = $_FILES['file']['tmp_name'];
+      $file_name = $_FILES['file']['name'];
+      $file_type = $_FILES['retic']['type'];
 
-  $targetFile =  $targetPath. $_FILES['retic']['name'];
+      $targetPath = dirname( __FILE__ ) . $ds. $storeFolder . $ds;
 
-  move_uploaded_file($tempFile,$targetFile);
+      $targetFile =  $targetPath. $_FILES['file']['name'];
 
+      move_uploaded_file($tempFile,$targetFile);
 
-// echo "<h2>Upload Details:</h2>";
-// foreach ($_FILES['retic'] as $key => $value) {
-//   echo "<p>" . "Key: " .$key . "Value: " . $value . "</p>";
-// }
-// DEFINE("RETIC", $_FILES['retic']);
+      $file = new Google_Service_Drive_DriveFile();
+      $folderId = '0By4zLqW7y7obZFRvcG9fN25IeXc';
 
-// Now lets try and send the metadata as well using multipart!
-$file = new Google_Service_Drive_DriveFile();
-$handle = fopen($_FILES["retic"]["tmp_name"], 'r');
-$file->setName("Retic File Upload");
-$result2 = $service->files->create(
-    $file,
-    array(
-      'data' => file_get_contents($handle),
-      'mimeType' => 'application/octet-stream',
-      'uploadType' => 'multipart'
-    )
-);
+      $fileMetadata = new Google_Service_Drive_DriveFile(array(
+          'name' =>   $file_name,
+          'parents' => array($folderId)
+      ));
+
+      $content = file_get_contents($targetFile);
+      $file = $service->files->create($fileMetadata, array(
+          'data' => $content,
+          'mimeType' => $file_type,
+          'uploadType' => 'resumable',
+          'fields' => 'id'));
+      printf("<p>File ID: %s\n</p>", $file->id);
+
+  }
+
+//   $file_name = $_FILES['retic']['name'];
+//   $file_size = $_FILES['retic']['size'];
+//   $file_tmp = $_FILES['retic']['tmp_name'];
+//   $file_type = $_FILES['retic']['type'];
+//
+//   echo "<p>File Name: " . $file_name . "</p>";
+//   echo "<p>File Size: " . $file_size . "</p>";
+//   echo "<p>File Tmp: " . $file_tmp . "</p>";
+//   echo "<p>File Type: " . $file_type . "</p>";
+//
+// // Now lets try and send the metadata as well using multipart!
+// $file = new Google_Service_Drive_DriveFile();
+// $folderId = '0By4zLqW7y7obZFRvcG9fN25IeXc';
+//
+// $fileMetadata = new Google_Service_Drive_DriveFile(array(
+//     'name' =>   "Wildlife.wmv",
+//     'parents' => array($folderId)
+// ));
+//
+// $content = file_get_contents($targetFile);
+// $file = $service->files->create($fileMetadata, array(
+//     'data' => $content,
+//     'mimeType' => 'video/wmv',
+//     'uploadType' => 'multipart',
+//     'fields' => 'id'));
+// printf("<p>File ID: %s\n</p>", $file->id);
+
+// $handle = fopen($_FILES["retic"]["tmp_name"], 'r');
+// $file->setName("Retic File Upload");
+// $result2 = $service->files->create(
+//     $file,
+//     array(
+//       'data' => file_get_contents($handle),
+//       'mimeType' => 'application/octet-stream',
+//       'uploadType' => 'multipart'
+//     )
+// );
 
 }
 
@@ -156,10 +196,24 @@ function formatBytes($bytes, $precision = 2) {
   </div>
 
 <?php else: ?>
-  <form enctype="multipart/form-data" method="POST" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
-    <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
-    <input type="file" name="retic" value="Choose file to upload">
-    <button type="submit">Submit</button>
-  </form>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <form id="my-dropzone" action="<?php echo $_SERVER["PHP_SELF"]; ?>" class="dropzone"></form>
+      </div>
+    </div>
+  </div>
 <?php endif ?>
 </div>
+<script type="text/javascript" src="js/dropzone.min.js"></script>
+<script>
+  Dropzone.options.myDropzone = {
+    maxFilesize: 500,
+    acceptedFiles: '.3gp,.3gp2,.h261,.h263,.h264,.jpgv,.jpm,.jpgm,.mp4,.mp4v,.mpg4,.mpeg,.mpg,.mpe,.m1v,.m2v,.ogv,.qt,.mov,.fli,.flv,.mks,.mkv,.wmv,.avi,.movie,.smv,.g3,.jpeg,.jpg,.jpe,.png,.btif,.sgi,.svg,.tiff,.tif',
+    init: function() {
+      this.on("uploadprogress", function(file, progress) {
+        console.log(progress);
+      });
+    }
+  }
+</script>
