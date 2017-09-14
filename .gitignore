@@ -8,6 +8,7 @@ bin-release/
 # Other files and folders
 .settings/
 vendor/
+node_modules/
 
 # Executables
 *.swf
