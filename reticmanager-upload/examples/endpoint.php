@@ -82,6 +82,14 @@ if ($method == "POST") {
 
         // To return a name used for uploaded file you can use the following line.
         $result["uploadName"] = $uploader->getUploadName();
+        // Return target file path
+        $result["uploadFile"] = $uploader->getTargetFile();
+        // Return target file path
+        $result["uploadFileSize"] = $uploader->getTargetFileSize();
+        // Push to Google Drive
+        set_time_limit(600); //File upload should not take longer than 10 minutes
+        uploadGoogleDrive($result["uploadName"], $result["uploadFile"], $result["uploadFileSize"]);
+        set_time_limit(30); //Reset to default
     }
 
     echo json_encode($result);
@@ -93,6 +101,73 @@ else if ($method == "DELETE") {
 }
 else {
     header("HTTP/1.0 405 Method Not Allowed");
+}
+
+
+function uploadGoogleDrive($file_name, $targetFile, $file_size)
+{
+  include_once __DIR__ . '../../../../autoload.php';
+  include_once "templates/base.php";
+
+  $client = new Google_Client();
+
+  if ($credentials_file = checkServiceAccountCredentialsFile()) {
+    $client->setAuthConfig($credentials_file);
+  } elseif (getenv('GOOGLE_APPLICATION_CREDENTIALS')) {
+    $client->useApplicationDefaultCredentials();
+  } else {
+    echo missingServiceAccountDetailsWarning();
+    return;
+  }
+
+  $client->setApplicationName("Client_Library_Examples");
+  $client->setScopes(['https://www.googleapis.com/auth/drive']);
+  $service = new Google_Service_Drive($client);
+  $folderId = '0By4zLqW7y7obZFRvcG9fN25IeXc';
+
+  $fileMetadata = new Google_Service_Drive_DriveFile(array(
+      'name' =>  $file_name,
+      'parents' => array($folderId)
+  ));
+
+  try {
+    $client->setDefer(true);
+    $request = $service->files->create($fileMetadata);
+
+    $chunkSizeBytes = 50 * 1024 * 1024;
+
+    $media = new Google_Http_MediaFileUpload(
+        $client,
+        $request,
+        '',
+        $targetFile,
+        true,
+        $chunkSizeBytes
+    );
+
+$media->setFileSize(filesize($targetFile));
+
+$status = false;
+$handle = fopen($targetFile, "rb");
+while (!$status && !feof($handle)) {
+$chunk = fread($handle, $chunkSizeBytes);
+$status = $media->nextChunk($chunk);
+}
+
+// The final value of $status will be the data from the API for the object
+// that has been uploaded.
+$result = false;
+if($status != false) {
+  $result = $status;
+}
+
+fclose($handle);
+// Reset to the client to execute requests immediately in the future.
+$client->setDefer(false);
+
+ } catch (Exception $e) {
+     print "An error occurred: " . $e->getMessage();
+ }
 }
 
 ?>

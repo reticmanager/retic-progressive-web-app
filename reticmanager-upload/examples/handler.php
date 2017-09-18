@@ -17,6 +17,8 @@ class UploadHandler {
     public $chunksExpireIn = 604800; // One week
 
     protected $uploadName;
+    protected $targetFile;
+    protected $targetFileSize;
 
     /**
      * Get the original filename
@@ -44,6 +46,19 @@ class UploadHandler {
      */
     public function getUploadName(){
         return $this->uploadName;
+    }
+    /**
+     * Get the target path
+     */
+    public function getTargetFile(){
+        return $this->targetFile;
+    }
+
+    /**
+     * Get the target path file size
+     */
+    public function getTargetFileSize(){
+        return $this->targetFileSize;
     }
 
     public function combineChunks($uploadDirectory, $name = null) {
@@ -126,6 +141,7 @@ class UploadHandler {
         // Get size and name
         $file = $_FILES[$this->inputName];
         $size = $file['size'];
+
         if (isset($_REQUEST['qqtotalfilesize'])) {
             $size = $_REQUEST['qqtotalfilesize'];
         }
@@ -138,7 +154,7 @@ class UploadHandler {
         if($file['error']) {
             return array('error' => 'Upload Error #'.$file['error']);
         }
-        	
+
         // Validate name
         if ($name === null || $name === ''){
             return array('error' => 'File name empty.');
@@ -185,6 +201,11 @@ class UploadHandler {
             $target = $targetFolder.'/'.$partIndex;
             $success = move_uploaded_file($_FILES[$this->inputName]['tmp_name'], $target);
 
+            // Set targetFileSize variable
+            $this->targetFileSize = $file['size'];
+            // Set targetFile variable
+            $this->targetFile = $target;
+
             return array("success" => true, "uuid" => $uuid);
 
         }
@@ -197,9 +218,19 @@ class UploadHandler {
                 $this->uploadName = basename($target);
 
                 if (!is_dir(dirname($target))){
+                  // Set targetFileSize variable
+                  $this->targetFileSize = $file['size'];
+                  // Set targetFile variable
+                  $this->targetFile = $target;
+
                     mkdir(dirname($target), 0777, true);
                 }
                 if (move_uploaded_file($file['tmp_name'], $target)){
+                  // Set targetFileSize variable
+                  $this->targetFileSize = $file['size'];
+                  // Set targetFile variable
+                  $this->targetFile = $target;
+
                     return array('success'=> true, "uuid" => $uuid);
                 }
             }
