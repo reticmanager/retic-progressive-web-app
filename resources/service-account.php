@@ -20,25 +20,7 @@ include_once "templates/base.php";
 
 echo pageHeader("Service Account Access");
 
-/************************************************
-  Make an API request authenticated with a service
-  account.
- ************************************************/
-
 $client = new Google_Client();
-
-/************************************************
-  ATTENTION: Fill in these values, or make sure you
-  have set the GOOGLE_APPLICATION_CREDENTIALS
-  environment variable. You can get these credentials
-  by creating a new Service Account in the
-  API console. Be sure to store the key file
-  somewhere you can get to it - though in real
-  operations you'd want to make sure it wasn't
-  accessible from the webserver!
-  Make sure the Books API is enabled on this
-  account as well, or the call will fail.
- ************************************************/
 
 if ($credentials_file = checkServiceAccountCredentialsFile()) {
   // set the location manually
@@ -54,12 +36,6 @@ if ($credentials_file = checkServiceAccountCredentialsFile()) {
 $client->setApplicationName("Client_Library_Examples");
 $client->setScopes(['https://www.googleapis.com/auth/drive']);
 $service = new Google_Service_Drive($client);
-
-/************************************************
-  We're just going to make the same call as in the
-  simple query as an example.
- ************************************************/
- // Print the names and IDs for up to 10 files.
 
 $optParams = array(
   'pageSize' => 50,
@@ -99,77 +75,6 @@ return $delete = $service->files->delete($id);
 // Upload testing
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-  $ds = DIRECTORY_SEPARATOR;
-
-  $storeFolder = 'file-uploads';
-
-  if (!empty($_FILES)) {
-
-      $tempFile = $_FILES['file']['tmp_name'];
-      $file_name = $_FILES['file']['name'];
-      $file_type = $_FILES['retic']['type'];
-
-      $targetPath = dirname( __FILE__ ) . $ds. $storeFolder . $ds;
-
-      $targetFile =  $targetPath. $_FILES['file']['name'];
-
-      move_uploaded_file($tempFile,$targetFile);
-
-      $file = new Google_Service_Drive_DriveFile();
-      $folderId = '0By4zLqW7y7obZFRvcG9fN25IeXc';
-
-      $fileMetadata = new Google_Service_Drive_DriveFile(array(
-          'name' =>   $file_name,
-          'parents' => array($folderId)
-      ));
-
-      $content = file_get_contents($targetFile);
-      $file = $service->files->create($fileMetadata, array(
-          'data' => $content,
-          'mimeType' => $file_type,
-          'uploadType' => 'resumable',
-          'fields' => 'id'));
-      printf("<p>File ID: %s\n</p>", $file->id);
-
-  }
-
-//   $file_name = $_FILES['retic']['name'];
-//   $file_size = $_FILES['retic']['size'];
-//   $file_tmp = $_FILES['retic']['tmp_name'];
-//   $file_type = $_FILES['retic']['type'];
-//
-//   echo "<p>File Name: " . $file_name . "</p>";
-//   echo "<p>File Size: " . $file_size . "</p>";
-//   echo "<p>File Tmp: " . $file_tmp . "</p>";
-//   echo "<p>File Type: " . $file_type . "</p>";
-//
-// // Now lets try and send the metadata as well using multipart!
-// $file = new Google_Service_Drive_DriveFile();
-// $folderId = '0By4zLqW7y7obZFRvcG9fN25IeXc';
-//
-// $fileMetadata = new Google_Service_Drive_DriveFile(array(
-//     'name' =>   "Wildlife.wmv",
-//     'parents' => array($folderId)
-// ));
-//
-// $content = file_get_contents($targetFile);
-// $file = $service->files->create($fileMetadata, array(
-//     'data' => $content,
-//     'mimeType' => 'video/wmv',
-//     'uploadType' => 'multipart',
-//     'fields' => 'id'));
-// printf("<p>File ID: %s\n</p>", $file->id);
-
-// $handle = fopen($_FILES["retic"]["tmp_name"], 'r');
-// $file->setName("Retic File Upload");
-// $result2 = $service->files->create(
-//     $file,
-//     array(
-//       'data' => file_get_contents($handle),
-//       'mimeType' => 'application/octet-stream',
-//       'uploadType' => 'multipart'
-//     )
-// );
 
 }
 
@@ -199,21 +104,98 @@ function formatBytes($bytes, $precision = 2) {
   <div class="container">
     <div class="row">
       <div class="col-md-10 col-md-offset-1">
-        <form id="my-dropzone" action="<?php echo $_SERVER["PHP_SELF"]; ?>" class="dropzone"></form>
+        <div id="fine-uploader"></div>
       </div>
     </div>
   </div>
 <?php endif ?>
 </div>
-<script type="text/javascript" src="js/dropzone.min.js"></script>
+<script type="text/javascript" src="js/fine-uploader.min.js"></script>
+<script type="text/template" id="qq-template">
+    <div class="qq-uploader-selector qq-uploader qq-gallery" qq-drop-area-text="Drop files here">
+        <div class="qq-total-progress-bar-container-selector qq-total-progress-bar-container">
+            <div role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" class="qq-total-progress-bar-selector qq-progress-bar qq-total-progress-bar"></div>
+        </div>
+        <div class="qq-upload-drop-area-selector qq-upload-drop-area" qq-hide-dropzone>
+            <span class="qq-upload-drop-area-text-selector"></span>
+        </div>
+        <div class="qq-upload-button-selector qq-upload-button">
+            <div>Upload a file</div>
+        </div>
+        <span class="qq-drop-processing-selector qq-drop-processing">
+            <span>Processing dropped files...</span>
+            <span class="qq-drop-processing-spinner-selector qq-drop-processing-spinner"></span>
+        </span>
+        <ul class="qq-upload-list-selector qq-upload-list" role="region" aria-live="polite" aria-relevant="additions removals">
+            <li>
+                <span role="status" class="qq-upload-status-text-selector qq-upload-status-text"></span>
+                <div class="qq-progress-bar-container-selector qq-progress-bar-container">
+                    <div role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" class="qq-progress-bar-selector qq-progress-bar"></div>
+                </div>
+                <span class="qq-upload-spinner-selector qq-upload-spinner"></span>
+                <div class="qq-thumbnail-wrapper">
+                    <img class="qq-thumbnail-selector" qq-max-size="120" qq-server-scale>
+                </div>
+                <button type="button" class="qq-upload-cancel-selector qq-upload-cancel">X</button>
+                <button type="button" class="qq-upload-retry-selector qq-upload-retry">
+                    <span class="qq-btn qq-retry-icon" aria-label="Retry"></span>
+                    Retry
+                </button>
+
+                <div class="qq-file-info">
+                    <div class="qq-file-name">
+                        <span class="qq-upload-file-selector qq-upload-file"></span>
+                        <span class="qq-edit-filename-icon-selector qq-btn qq-edit-filename-icon" aria-label="Edit filename"></span>
+                    </div>
+                    <input class="qq-edit-filename-selector qq-edit-filename" tabindex="0" type="text">
+                    <span class="qq-upload-size-selector qq-upload-size"></span>
+                    <button type="button" class="qq-btn qq-upload-delete-selector qq-upload-delete">
+                        <span class="qq-btn qq-delete-icon" aria-label="Delete"></span>
+                    </button>
+                    <button type="button" class="qq-btn qq-upload-pause-selector qq-upload-pause">
+                        <span class="qq-btn qq-pause-icon" aria-label="Pause"></span>
+                    </button>
+                    <button type="button" class="qq-btn qq-upload-continue-selector qq-upload-continue">
+                        <span class="qq-btn qq-continue-icon" aria-label="Continue"></span>
+                    </button>
+                </div>
+            </li>
+        </ul>
+
+        <dialog class="qq-alert-dialog-selector">
+            <div class="qq-dialog-message-selector"></div>
+            <div class="qq-dialog-buttons">
+                <button type="button" class="qq-cancel-button-selector">Close</button>
+            </div>
+        </dialog>
+
+        <dialog class="qq-confirm-dialog-selector">
+            <div class="qq-dialog-message-selector"></div>
+            <div class="qq-dialog-buttons">
+                <button type="button" class="qq-cancel-button-selector">No</button>
+                <button type="button" class="qq-ok-button-selector">Yes</button>
+            </div>
+        </dialog>
+
+        <dialog class="qq-prompt-dialog-selector">
+            <div class="qq-dialog-message-selector"></div>
+            <input type="text">
+            <div class="qq-dialog-buttons">
+                <button type="button" class="qq-cancel-button-selector">Cancel</button>
+                <button type="button" class="qq-ok-button-selector">Ok</button>
+            </div>
+        </dialog>
+    </div>
+</script>
 <script>
-  Dropzone.options.myDropzone = {
-    maxFilesize: 500,
-    acceptedFiles: '.3gp,.3gp2,.h261,.h263,.h264,.jpgv,.jpm,.jpgm,.mp4,.mp4v,.mpg4,.mpeg,.mpg,.mpe,.m1v,.m2v,.ogv,.qt,.mov,.fli,.flv,.mks,.mkv,.wmv,.avi,.movie,.smv,.g3,.jpeg,.jpg,.jpe,.png,.btif,.sgi,.svg,.tiff,.tif',
-    init: function() {
-      this.on("uploadprogress", function(file, progress) {
-        console.log(progress);
-      });
-    }
-  }
+    var uploader = new qq.FineUploader({
+        debug: true,
+        element: document.getElementById('fine-uploader'),
+        request: {
+            endpoint: 'endpoint.php'
+        },
+        retry: {
+           enableAuto: false
+        }
+    });
 </script>
