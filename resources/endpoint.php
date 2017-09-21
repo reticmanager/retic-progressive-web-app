@@ -80,10 +80,11 @@ function uploadGoogleDrive($file_name, $targetFile, $file_size)
   include_once __DIR__ . '../../../../autoload.php';
   include_once "templates/base.php";
 
+  $user_to_impersonate = "chaz.g@cgnetwork.co.nz";
+
   $client = new Google_Client();
   $client->useApplicationDefaultCredentials();
-
-  $client->setSubject("cgnetwork.nz@gmail.com");
+  $client->setSubject($user_to_impersonate);
 
   if ($credentials_file = checkServiceAccountCredentialsFile()) {
     $client->setAuthConfig($credentials_file);
@@ -97,7 +98,7 @@ function uploadGoogleDrive($file_name, $targetFile, $file_size)
   $client->setApplicationName("Client_Library_Examples");
   $client->setScopes(['https://www.googleapis.com/auth/drive']);
   $service = new Google_Service_Drive($client);
-  $folderId = '0By4zLqW7y7obZFRvcG9fN25IeXc';
+  $folderId = '0B8NupnEfeFKOd2dnSm05NmpkMFk';
   $fileId = '';
 
   $fileMetadata = new Google_Service_Drive_DriveFile(array(
@@ -150,20 +151,6 @@ $results = $service->files->listFiles($optParams);
 foreach ($results->getFiles() as $file) {
   $fileId = $file->getId();
 }
-
-// $service->getClient()->setUseBatch(true);
-//
-// $batch = $service->createBatch();
-//
-// $userPermission = new Google_Service_Drive_Permission(array(
-//     'type' => 'domain',
-//     'role' => 'owner',
-//     'emailAddress' => 'cgnetwork.nz@gmail.com'
-// ));
-//
-// $request = $service->permissions->update(
-//     $fileId, $userPermission, array('transferOwnership' => 'true'));
-//     $batch->add($request, 'user');
 
  } catch (Exception $e) {
      print "An error occurred: " . $e->getMessage();
