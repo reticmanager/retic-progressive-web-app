@@ -13,17 +13,82 @@
 </head>
 
 <body>
-  <?php echo $error;?>
+<?php echo $error;?>
 
-<?php echo form_open_multipart('app/do_upload');?>
+<?php
+$date = array(
+  'type' => 'hidden',
+  'name' => 'date',
+  'v-bind:value' => 'date'
+);
 
-<input type="file" name="userfile" size="20" />
+$latitude = array(
+  'type' => 'hidden',
+  'name' => 'latitude',
+  'v-bind:value' => 'gps.lat'
+);
 
-<br /><br />
+$longitude = array(
+  'type' => 'hidden',
+  'name' => 'longitude',
+  'v-bind:value' => 'gps.long'
+);
 
-<input type="submit" value="upload" />
+$images = array(
+  'type' => 'file',
+  'v-on:change' => 'getImage',
+  'accept' => 'image/*',
+  'name' => 'images',
+  'style' => 'display: none',
+  'ref' => 'inputOne'
+);
 
-</form>
+$extras = array(
+  'class' => 'form-control custom-height',
+  'v-on:change' => 'optionSelect',
+  'v-model' => 'selected.type'
+);
+
+$types = array(
+        'select' => 'Select',
+        'manhole' => 'Manhole',
+        'inflow'  => 'Infiltration / Inflow',
+        'connections' => 'Connections',
+        'other' => 'Other'
+);
+
+$networks = array(
+        'select' => 'Select',
+        'sewage' => 'Sewage',
+        'storm' => 'Storm',
+        'combined'  => 'Combined',
+        'other' => 'Other'
+);
+
+$statuses = array(
+        'select' => 'Select',
+        'located' => 'Located',
+        'buried' => 'Buried',
+        'new'  => 'New',
+        'gis' => 'Not on GIS'
+);
+
+$diameters = array(
+        'select' => 'Select',
+        '1050' => '1050',
+        '1200' => '1200',
+        '1400'  => '1400',
+        '1500' => '1500',
+        '1650' => '1650',
+        '1800' => '1800',
+        '2050'  => '2050',
+        '2300' => '2300',
+        '2550' => '2550',
+        '3000' => '3000',
+        '3200'  => '3200'
+);
+
+ ?>
   <div id="app">
     <div class="row cont-center">
       <div class="col-md-12 col-margins">
@@ -46,14 +111,15 @@
             </div>
           </div>
         </div>
+
+
+        <?php echo form_open_multipart('app/do_upload');?>
+
         <div class="row">
           <div class="col-md-6 col-md-offset-3">
             <div class="form-group center">
               <h4>Inspection Type</h4>
-              <select v-model="selected.type" v-on:change="optionSelect" class="form-control custom-height">
-  								<option disabled value="">Select</option>
-  								<option v-for="type in types"> {{ type }} </option>
-  							</select>
+              <?php echo form_dropdown('types', $types, '', $extras); ?>
             </div>
           </div>
         </div>
@@ -73,6 +139,7 @@
                     </th>
                     <td class=" custom-td-width">
                       <h5>{{ date }}</h5>
+                      <?php echo form_input($date); ?>
                     </td>
                   </tr>
                   <tr class="custom-height">
@@ -87,6 +154,8 @@
                     <td class=" custom-td-width">
                       <h5>Latitude: {{ gps.lat }}</h5>
                       <h5>Longitude: {{ gps.long }}</h5>
+                      <?php echo form_input($latitude); ?>
+                      <?php echo form_input($longitude); ?>
                     </td>
                   </tr>
                   <tr class="custom-height">
@@ -98,7 +167,9 @@
   														<p>
   															<span class="">Image 1</span>
   														</p>
-  														<input id="inputOne" ref="inputOne" v-on:change="getImage" style="display: none;" type="file" accept="image/*">
+
+                              <?php echo form_input($images); ?>
+
   														</span>
   													</label>
                       </div>
@@ -116,7 +187,7 @@
           </div>
           <div id="mh-details-table" class="form-group center">
             <div class="col-md-6 col-md-offset-3">
-              <div v-if="manHole">
+              <div v-if="manhole">
                 <table class="table table-sm table-hover table-striped table-bordered">
                   <tbody>
                     <tr class="custom-height">
@@ -140,10 +211,7 @@
                         <h5>Network</h5>
                       </th>
                       <td class=" custom-td-width">
-                        <select placeholder="Select" v-model="selected.network" class="form-control custom-height custom-td-width">
-  																	<option disabled value="">Select</option>
-  																	<option v-for="network in networks"> {{ network }} </option>
-  																</select>
+              <?php echo form_dropdown('networks', $networks, '', 'class="form-control custom-height custom-td-width"'); ?>
                       </td>
                     </tr>
                     <tr class="custom-height">
@@ -151,10 +219,7 @@
                         <h5>Located Status</h5>
                       </th>
                       <td class=" custom-td-width">
-                        <select v-model="selected.status" class="form-control custom-height custom-td-width">
-  																	<option disabled value="">Select</option>
-  																	<option v-for="status in statuses"> {{ status }} </option>
-  																</select>
+              <?php echo form_dropdown('statuses', $statuses, '', 'class="form-control custom-height custom-td-width"'); ?>
                       </td>
                     </tr>
                     <tr class="custom-height">
@@ -178,10 +243,7 @@
                         <h5>Node Diameter</h5>
                       </th>
                       <td class=" custom-td-width">
-                        <select placeholder="Select" v-model="selected.diameter" class="form-control custom-height custom-td-width">
-  																			<option disabled value="">Select</option>
-  																			<option v-for="diameter in diameters"> {{ diameter }} </option>
-  																		</select>
+              <?php echo form_dropdown('diameters', $diameters, '', 'class="form-control custom-height custom-td-width"'); ?>
                       </td>
                     </tr>
                   </tbody>
@@ -191,9 +253,12 @@
           </div>
         </div>
         <div class="col-md-6 col-md-offset-3">
-          <button id="submit" name="submit" class="submit-buttons custom-height btn btn-primary webapp-buttons final-buttons" value="1">Submit</button>
-          <a href="https://reticmanager.com/app/view/wdc160" id="cancel" name="cancel" class="submit-buttons custom-height btn btn-primary webapp-buttons final-buttons">Cancel</a>
+          <button id="submit" type="submit" class="submit-buttons custom-height btn btn-primary webapp-buttons final-buttons" value="upload">Submit</button>
+          <!-- <a href="https://reticmanager.com/app/view/wdc160" id="cancel" name="cancel" class="submit-buttons custom-height btn btn-primary webapp-buttons final-buttons">Cancel</a> -->
         </div>
+
+        <?php echo form_close(); ?>
+
       </div>
     </div>
   </div>

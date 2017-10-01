@@ -61,17 +61,27 @@ class App extends MY_Controller {
 
         $this->load->library('upload', $config);
 
-        if ( ! $this->upload->do_upload('userfile'))
+        if ( ! $this->upload->do_upload('images'))
         {
                 $error = array('error' => $this->upload->display_errors());
 
-                $this->load->view('upload_form', $error);
+                $this->load->view('success', $error);
         }
         else
         {
-                $data = array('upload_data' => $this->upload->data());
+                $data = array(
+                  'type' => $this->input->post('types'),
+                  'date' => $this->input->post('date'),
+                  'latitude' => $this->input->post('latitude'),
+                  'longitude' => $this->input->post('longitude'),
+                  'imageone' => $this->upload->data(),
+                  'networks' => $this->input->post('networks'),
+                  'statuses' => $this->input->post('statuses'),
+                  'diameters' => $this->input->post('diameters'),
+                );
 
-                $this->load->view('upload_success', $data);
+                echo '<pre>'; print_r($data); echo '</pre>';
+
         }
 }
   }
