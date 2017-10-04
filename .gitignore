@@ -9,6 +9,7 @@ bin-release/
 .settings/
 vendor/
 node_modules/
+google-api-php-client-2.2.0/
 
 # Executables
 *.swf
