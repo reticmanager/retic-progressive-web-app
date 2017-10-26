@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html class="mdc-typography" lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+  <link rel="stylesheet" href="node_modules/material-design-lite/material.min.css">
+  <script src="node_modules/material-design-lite/material.min.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <!-- <link rel="stylesheet" href="node_modules/material-components-web/dist/material-components-web.css"> -->
+
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  <style media="screen">
+    .full-width {
+      width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Textfield with Floating Label -->
+
+  <!-- Always shows a header, even in smaller screens. -->
+
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header">
+      <div class="mdl-layout__header-row">
+        <!-- Title -->
+        <span class="mdl-layout-title">New Survey</span>
+        <!-- Add spacer, to align navigation to the right -->
+        <div class="mdl-layout-spacer"></div>
+        <!-- Navigation. We hide it in small screens. -->
+        <nav class="mdl-navigation mdl-layout--small-screen">
+          <a class="mdl-navigation__link" href=""><i class="material-icons">replay</i></a>
+          <!-- <a class="mdl-navigation__link" href="">Link</a> -->
+        </nav>
+      </div>
+    </header>
+    <div class="mdl-layout__drawer">
+      <span class="mdl-layout-title">Retic Manager</span>
+      <nav class="mdl-navigation">
+        <a class="mdl-navigation__link" href=""><i class="material-icons">dashboard</i>  Dashboard</a>
+        <a class="mdl-navigation__link" href=""><i class="material-icons">receipt</i>  Receipts</a>
+      </nav>
+    </div>
+    <main class="mdl-layout__content">
+      <div class="page-content">
+        <div class="mdl-grid">
+          <div class="mdl-cell mdl-cell--6-col mdl-cell--3-offset">
+            <div class="demo-list-action mdl-list">
+              <div class="mdl-list__item">
+                <span class="mdl-list__item-primary-content">
+                  <i class="material-icons mdl-list__item-avatar">person</i>
+                  <span>Client City Council</span>
+                </span>
+              </div>
+            </div>
+            <!-- Simple Select -->
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fullwidth">
+                <input class="mdl-textfield__input" type="text" id="sample1" value="Select" readonly tabIndex="-1">
+                <label for="sample1" class="mdl-textfield__label">Inspection Type</label>
+                <ul for="sample1" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+                    <li class="mdl-menu__item">Manhole</li>
+                    <li class="mdl-menu__item">Infiltration / Inflow</li>
+                    <li class="mdl-menu__item">Connections</li>
+                    <li class="mdl-menu__item">Other</li>
+                </ul>
+            </div>
+            <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp full-width">
+              <thead>
+                <tr>
+                  <th class="mdl-data-table__cell--non-numeric full-width">Material</th>
+                  <th>Quantity</th>
+                  <th>Unit price</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="mdl-data-table__cell--non-numeric">Acrylic (Transparent)</td>
+                  <td>25</td>
+                  <td>$2.90</td>
+                </tr>
+                <tr>
+                  <td class="mdl-data-table__cell--non-numeric">Plywood (Birch)</td>
+                  <td>50</td>
+                  <td>$1.25</td>
+                </tr>
+                <tr>
+                  <td class="mdl-data-table__cell--non-numeric">Laminate (Gold on Blue)</td>
+                  <td>10</td>
+                  <td>$2.35</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="mdl-cell mdl-cell--6-col mdl-cell--3-offset">
+            <form action="#">
+              <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="sample3">
+                <label class="mdl-textfield__label" for="sample3">Text...</label>
+              </div>
+            </form>
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Button</button>
+
+
+
+          </div>
+
+        </div>
+
+      </div>
+    </main>
+  </div>
+  <!-- <script src="node_modules/material-components-web/dist/material-components-web.js"></script>
+<script>mdc.autoInit()</script> -->
+<link rel="stylesheet" href="node_modules/getmdl-select/getmdl-select.min.css">
+<script defer src="node_modules/getmdl-select/getmdl-select.min.js"></script>
+  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script> -->
+</body>
+
+</html>
